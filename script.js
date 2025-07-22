@@ -122,4 +122,4 @@ createMobileMenu();
 // Console Easter Egg
 console.log('%c🚀 Welcome to David Mike-Ewewie\'s Portfolio!', 'font-size: 20px; color: #2563eb; font-weight: bold;');
 console.log('%cBuilding the future, one model at a time.', 'font-size: 14px; color: #6b7280;');
-console.log('%c📧 Contact: dmike@example.com', 'font-size: 12px; color: #6b7280;');
+console.log('%c📧 Contact: contact@davidmike.io', 'font-size: 12px; color: #6b7280;');
