@@ -407,3 +407,182 @@ section {
         align-items: center;
     }
 }
+
+/* Certifications Section */
+.certifications {
+    padding: 80px 0;
+    background-color: var(--bg-light);
+}
+
+.cert-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.cert-stat {
+    background: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.cert-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.cert-label {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.cert-grid {
+    display: grid;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.cert-category {
+    background: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.cert-category-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.cert-category-title i {
+    color: var(--primary-color);
+}
+
+.cert-list {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.cert-item {
+    padding: 1.5rem;
+    background: var(--bg-light);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.cert-item:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+}
+
+.cert-item.in-progress {
+    opacity: 0.8;
+    border-style: dashed;
+}
+
+.cert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.cert-header h4 {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.cert-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.cert-badge.new {
+    background: var(--success-color);
+    color: white;
+}
+
+.cert-badge.progress {
+    background: var(--accent-color);
+    color: white;
+}
+
+.cert-details {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.cert-details i {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+}
+
+.cert-id {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-family: 'Courier New', monospace;
+}
+
+.cert-footer {
+    text-align: center;
+}
+
+.cert-verify-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.cert-verify-link:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Responsive Certifications */
+@media (max-width: 768px) {
+    .cert-overview {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .cert-stat {
+        padding: 1.5rem;
+    }
+    
+    .cert-number {
+        font-size: 2rem;
+    }
+    
+    .cert-category {
+        padding: 1.5rem;
+    }
+    
+    .cert-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
