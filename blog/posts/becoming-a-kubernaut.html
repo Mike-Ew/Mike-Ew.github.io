@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Becoming a Kubernaut: Building a GPU Cluster for Distributed ML Training | David Mike-Ewewie</title>
+    <meta name="description" content="How I'm building a home Kubernetes cluster with GPU support for distributed training. From bare metal to production-ready ML infrastructure.">
+    <link rel="stylesheet" href="../../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">DME</div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../index.html#about">About</a></li>
+                <li><a href="../../index.html#projects">Projects</a></li>
+                <li><a href="../../index.html#publications">Research</a></li>
+                <li><a href="../blog.html" class="active">Blog</a></li>
+                <li><a href="../../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <article class="blog-post">
+        <div class="container">
+            <header class="post-header">
+                <div class="post-meta">
+                    <span class="post-category">Kubernetes</span>
+                    <span class="post-date">July 29, 2025</span>
+                    <span class="post-read-time"><i class="fas fa-clock"></i> 8 min read</span>
+                </div>
+                <h1 class="post-title">Becoming a Kubernaut: Building a GPU Cluster for Distributed ML Training</h1>
+                <p class="post-subtitle">How I'm building a home Kubernetes cluster with GPU support for distributed training. From bare metal to production-ready ML infrastructure.</p>
+            </header>
+
+            <div class="post-content">
+                <p>
+                    If you want to work on ML infrastructure at companies like Tesla or Google, you need to understand distributed training at a deep level. 
+                    Not just the theory, but the practical challenges of orchestrating GPUs, managing data pipelines, and scaling training jobs. 
+                    That's why I'm building my own Kubernetes cluster.
+                </p>
+
+                <h2>The Hardware Foundation</h2>
+                <p>
+                    My cluster consists of 4 nodes built from enterprise hardware I've collected:
+                </p>
+                <ul>
+                    <li><strong>GPU Node:</strong> MSI MEG Trident X2 with RTX 4070 (planning to add RTX 5060 Ti when it launches)</li>
+                    <li><strong>CPU Node 1:</strong> Dell OptiPlex 7050 (i7-6700, 16GB RAM)</li>
+                    <li><strong>CPU Node 2:</strong> Dell OptiPlex 3070 (i5-9500T, 8GB RAM, 4TB SSD)</li>
+                    <li><strong>CPU Node 3:</strong> HP EliteDesk 800 G3 (i5-7500T, 16GB RAM)</li>
+                </ul>
+
+                <h2>Why K3s Over K8s</h2>
+                <p>
+                    For a home lab, K3s provides the perfect balance of functionality and resource efficiency. 
+                    It's a lightweight Kubernetes distribution that includes everything you need for ML workloads:
+                </p>
+                <pre><code class="language-bash"># Install K3s on master node
+curl -sfL https://get.k3s.io | sh -
+
+# Get node token for workers
+sudo cat /var/lib/rancher/k3s/server/node-token
+
+# Install on worker nodes
+curl -sfL https://get.k3s.io | K3S_URL=https://master-ip:6443 K3S_TOKEN=xxx sh -</code></pre>
+
+                <h2>GPU Support with NVIDIA GPU Operator</h2>
+                <p>
+                    The NVIDIA GPU Operator automates the management of all NVIDIA software components needed to provision GPU workers in a Kubernetes cluster:
+                </p>
+                <pre><code class="language-bash"># Add NVIDIA Helm repository
+helm repo add nvidia https://helm.ngc.nvidia.com/nvidia
+helm repo update
+
+# Install GPU Operator
+helm install --wait --generate-name \
+    -n gpu-operator --create-namespace \
+    nvidia/gpu-operator</code></pre>
+
+                <h2>Distributed Training with PyTorch</h2>
+                <p>
+                    Here's a simple example of how I'm running distributed training jobs on the cluster:
+                </p>
+                <pre><code class="language-yaml">apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pytorch-distributed
+spec:
+  parallelism: 2
+  template:
+    spec:
+      containers:
+      - name: pytorch
+        image: pytorch/pytorch:latest-cuda11.8
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+        command: ["python", "-m", "torch.distributed.launch",
+                  "--nproc_per_node=1", "train.py"]</code></pre>
+
+                <h2>Monitoring with Prometheus and Grafana</h2>
+                <p>
+                    Visibility is crucial when running distributed workloads. I use Prometheus to collect metrics and Grafana for visualization:
+                </p>
+                <ul>
+                    <li>GPU utilization and memory usage</li>
+                    <li>Training loss and accuracy curves</li>
+                    <li>Network bandwidth between nodes</li>
+                    <li>Storage I/O patterns</li>
+                </ul>
+
+                <h2>Lessons Learned So Far</h2>
+                <ol>
+                    <li><strong>Network is the bottleneck:</strong> Upgraded to 10GbE for the GPU node</li>
+                    <li><strong>Storage matters:</strong> NVMe for datasets, NFS for shared model checkpoints</li>
+                    <li><strong>Power and cooling:</strong> The cluster pulls 600W under full load</li>
+                    <li><strong>Automation is key:</strong> GitOps with ArgoCD saves hours of manual work</li>
+                </ol>
+
+                <h2>What's Next</h2>
+                <p>
+                    I'm working on several improvements:
+                </p>
+                <ul>
+                    <li>Adding a second GPU (RTX 5060 Ti) for model parallelism experiments</li>
+                    <li>Implementing Kubeflow for end-to-end ML pipelines</li>
+                    <li>Building a custom operator for my Arctic sea ice classification model</li>
+                    <li>Open-sourcing my configuration as a learning resource</li>
+                </ul>
+
+                <h2>Why This Matters for Your Career</h2>
+                <p>
+                    Companies like Tesla aren't just looking for people who can train models in Colab. 
+                    They need engineers who understand the full stack - from hardware to distributed systems to ML frameworks. 
+                    Building your own cluster teaches you:
+                </p>
+                <ul>
+                    <li>Real production challenges (not just toy problems)</li>
+                    <li>Cost optimization (my setup costs less than $2K)</li>
+                    <li>Debugging skills that you can't learn from tutorials</li>
+                    <li>Stories for interviews ("Let me tell you about scaling my home cluster...")</li>
+                </ul>
+
+                <p>
+                    The best part? Once it's running, you have 24/7 access to compute without worrying about cloud costs or quotas. 
+                    Perfect for those long training runs on your research projects.
+                </p>
+
+                <div class="post-cta">
+                    <h3>Want to Learn More?</h3>
+                    <p>I'm documenting the entire build process on GitHub. Follow along as I turn this cluster into a production-ready ML platform.</p>
+                    <a href="https://github.com/Mike-Ew/home-gpu-cluster" class="btn btn-primary">View on GitHub</a>
+                </div>
+            </div>
+
+            <footer class="post-footer">
+                <div class="post-tags">
+                    <span class="tag">Kubernetes</span>
+                    <span class="tag">GPU</span>
+                    <span class="tag">Distributed Training</span>
+                    <span class="tag">ML Infrastructure</span>
+                </div>
+                <div class="post-share">
+                    <span>Share this post:</span>
+                    <a href="https://twitter.com/intent/tweet?url=https://davidmike.io/blog/posts/becoming-a-kubernaut.html" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://davidmike.io/blog/posts/becoming-a-kubernaut.html" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </footer>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 David Mike-Ewewie. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://github.com/Mike-Ew" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/david-mike-ewewie" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://twitter.com/davidmikeew" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+</body>
+</html>

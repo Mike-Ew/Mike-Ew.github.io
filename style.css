@@ -15,6 +15,11 @@
     --border-color: #e5e7eb;
     --success-color: #10b981;
     --accent-color: #8b5cf6;
+    --enterprise-color: #dc2626;
+    --aiml-color: #7c3aed;
+    --devops-color: #0891b2;
+    --research-color: #059669;
+    --systems-color: #ea580c;
 }
 
 body {
@@ -378,6 +383,172 @@ section {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Path Selector Styles */
+.path-selector {
+    margin: 3rem 0;
+    text-align: center;
+}
+
+.path-selector h3 {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+
+.path-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.path-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    background: var(--bg-light);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+}
+
+.path-btn i {
+    font-size: 1.5rem;
+    color: var(--text-light);
+    transition: color 0.3s ease;
+}
+
+.path-btn span {
+    font-size: 0.875rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.path-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.path-btn.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.path-btn.active i,
+.path-btn.active span {
+    color: white;
+}
+
+.path-btn[data-path="enterprise"]:hover { border-color: var(--enterprise-color); }
+.path-btn[data-path="enterprise"]:hover i { color: var(--enterprise-color); }
+.path-btn[data-path="aiml"]:hover { border-color: var(--aiml-color); }
+.path-btn[data-path="aiml"]:hover i { color: var(--aiml-color); }
+.path-btn[data-path="devops"]:hover { border-color: var(--devops-color); }
+.path-btn[data-path="devops"]:hover i { color: var(--devops-color); }
+.path-btn[data-path="research"]:hover { border-color: var(--research-color); }
+.path-btn[data-path="research"]:hover i { color: var(--research-color); }
+.path-btn[data-path="systems"]:hover { border-color: var(--systems-color); }
+.path-btn[data-path="systems"]:hover i { color: var(--systems-color); }
+
+.view-mode {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.mode-btn {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-color);
+    font-size: 0.875rem;
+}
+
+.mode-btn:hover {
+    background: var(--bg-light);
+    border-color: var(--primary-color);
+}
+
+.mode-btn i {
+    margin-right: 0.5rem;
+}
+
+/* Dynamic content visibility */
+[data-path-content] {
+    display: none;
+}
+
+[data-path-content].active {
+    display: block;
+}
+
+/* Beyond Code Section */
+.beyond-code {
+    padding: 80px 0;
+    background: var(--bg-light);
+}
+
+.beyond-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.beyond-item {
+    background: var(--bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.beyond-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.beyond-item i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.beyond-item p {
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.beyond-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.beyond-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.beyond-links a:hover {
+    text-decoration: underline;
 }
 
 /* Responsive Design */

@@ -119,6 +119,134 @@ function createMobileMenu() {
 
 createMobileMenu();
 
+// Path Selector Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const pathButtons = document.querySelectorAll('.path-btn');
+    const modeButtons = document.querySelectorAll('.mode-btn');
+    let currentPath = 'all';
+    let currentMode = 'corporate';
+    
+    // Path button click handler
+    pathButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remove active class from all buttons
+            pathButtons.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Get selected path
+            currentPath = this.getAttribute('data-path');
+            updateContent();
+        });
+    });
+    
+    // Mode button click handler
+    modeButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            currentMode = this.getAttribute('data-mode');
+            updateContent();
+        });
+    });
+    
+    // Update content based on selected path and mode
+    function updateContent() {
+        // Hide all path-specific content
+        document.querySelectorAll('[data-path-content]').forEach(el => {
+            el.classList.remove('active');
+        });
+        
+        // Show content for selected path
+        document.querySelectorAll(`[data-path-content="${currentPath}"]`).forEach(el => {
+            el.classList.add('active');
+        });
+        
+        // Update hero stats based on path
+        updateHeroStats();
+        
+        // Filter projects based on path
+        filterProjects();
+        
+        // Update URL without reload
+        const url = new URL(window.location);
+        url.searchParams.set('path', currentPath);
+        if (currentMode !== 'corporate') {
+            url.searchParams.set('mode', currentMode);
+        }
+        window.history.pushState({}, '', url);
+    }
+    
+    // Update hero statistics based on selected path
+    function updateHeroStats() {
+        const stats = document.querySelectorAll('.hero-stats .stat');
+        const pathStats = {
+            all: [
+                { number: '5', label: 'AWS Certifications' },
+                { number: '130+', label: 'Team Managed' },
+                { number: '98.4%', label: 'Model Accuracy' }
+            ],
+            enterprise: [
+                { number: '130+', label: 'Users Managed' },
+                { number: '$200K', label: 'Cost Savings' },
+                { number: '99.9%', label: 'Uptime' }
+            ],
+            aiml: [
+                { number: '98.4%', label: 'Model Accuracy' },
+                { number: '1M+', label: 'Predictions/sec' },
+                { number: '4', label: 'Published Papers' }
+            ],
+            devops: [
+                { number: '5', label: 'AWS Certs' },
+                { number: '99.9%', label: 'Uptime' },
+                { number: '40%', label: 'Cost Reduction' }
+            ],
+            research: [
+                { number: '4', label: 'Publications' },
+                { number: '98.4%', label: 'Best Accuracy' },
+                { number: '2', label: 'IEEE Papers' }
+            ],
+            systems: [
+                { number: '4', label: 'GPU Nodes' },
+                { number: '10Gb', label: 'Network Speed' },
+                { number: '24/7', label: 'Availability' }
+            ]
+        };
+        
+        const selectedStats = pathStats[currentPath] || pathStats.all;
+        stats.forEach((stat, index) => {
+            if (selectedStats[index]) {
+                stat.querySelector('.stat-number').textContent = selectedStats[index].number;
+                stat.querySelector('.stat-label').textContent = selectedStats[index].label;
+            }
+        });
+    }
+    
+    // Filter projects based on selected path
+    function filterProjects() {
+        const projects = document.querySelectorAll('.project-card');
+        projects.forEach(project => {
+            const projectPaths = project.getAttribute('data-paths')?.split(',') || ['all'];
+            if (currentPath === 'all' || projectPaths.includes(currentPath)) {
+                project.style.display = 'block';
+            } else {
+                project.style.display = 'none';
+            }
+        });
+    }
+    
+    // Check URL parameters on load
+    const urlParams = new URLSearchParams(window.location.search);
+    const pathParam = urlParams.get('path');
+    const modeParam = urlParams.get('mode');
+    
+    if (pathParam && document.querySelector(`[data-path="${pathParam}"]`)) {
+        document.querySelector(`[data-path="${pathParam}"]`).click();
+    }
+    
+    if (modeParam && document.querySelector(`[data-mode="${modeParam}"]`)) {
+        document.querySelector(`[data-mode="${modeParam}"]`).click();
+    }
+});
+
 // Console Easter Egg
 console.log('%c🚀 Welcome to David Mike-Ewewie\'s Portfolio!', 'font-size: 20px; color: #2563eb; font-weight: bold;');
 console.log('%cBuilding the future, one model at a time.', 'font-size: 14px; color: #6b7280;');
