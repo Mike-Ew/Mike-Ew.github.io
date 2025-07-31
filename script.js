@@ -198,33 +198,33 @@ document.addEventListener('DOMContentLoaded', function() {
         const stats = document.querySelectorAll('.hero-stats .stat');
         const pathStats = {
             all: [
-                { number: '5', label: 'AWS Certifications' },
-                { number: '130+', label: 'Team Managed' },
-                { number: '98.4%', label: 'Model Accuracy' }
+                { number: '5', label: 'Certifications' },
+                { number: '3+', label: 'Publications' },
+                { number: '520', label: 'Requests/sec' }
             ],
             enterprise: [
                 { number: '130+', label: 'Users Managed' },
-                { number: '$200K', label: 'Cost Savings' },
-                { number: '99.9%', label: 'Uptime' }
+                { number: '99.9%', label: 'Uptime' },
+                { number: '3', label: 'AWS Certs' }
             ],
             aiml: [
                 { number: '98.4%', label: 'Model Accuracy' },
-                { number: '1M+', label: 'Predictions/sec' },
-                { number: '4', label: 'Published Papers' }
+                { number: '66%', label: 'Improvement' },
+                { number: '3+', label: 'Papers' }
             ],
             devops: [
-                { number: '5', label: 'AWS Certs' },
-                { number: '99.9%', label: 'Uptime' },
-                { number: '40%', label: 'Cost Reduction' }
+                { number: '5', label: 'Certifications' },
+                { number: '24/7', label: 'Monitoring' },
+                { number: 'K8s', label: 'Expertise' }
             ],
             research: [
-                { number: '4', label: 'Publications' },
-                { number: '98.4%', label: 'Best Accuracy' },
-                { number: '2', label: 'IEEE Papers' }
+                { number: '3+', label: 'Publications' },
+                { number: '1', label: 'IEEE Paper' },
+                { number: '2025', label: 'Latest Work' }
             ],
             systems: [
-                { number: '4', label: 'GPU Nodes' },
-                { number: '10Gb', label: 'Network Speed' },
+                { number: 'IoT', label: 'Smart Meter' },
+                { number: '38ms', label: 'Latency' },
                 { number: '24/7', label: 'Availability' }
             ]
         };
