@@ -1,0 +1,321 @@
+Testing Contextual Thompson Sampling Bandit
+
+Initialized bandit with 3 arms and 5 features
+
+Running simulation...
+
+Step 1:
+  Theta values: [0.75 0.75 0.75], Chosen arm: 0
+  Learning: arm=0, reward=0.7, buffer_size=1
+
+Step 2:
+  Theta values: [0.75 0.75 0.75], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=2
+
+Step 3:
+  Theta values: [0.75 0.75 0.75], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=3
+
+Step 4:
+  Theta values: [0.75 0.75 0.75], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=4
+
+Step 5:
+  Theta values: [0.75 0.75 0.75], Chosen arm: 0
+  Learning: arm=0, reward=0.7, buffer_size=5
+
+Step 6:
+  Theta values: [0.75 0.75 0.75], Chosen arm: 0
+  Learning: arm=0, reward=0.7, buffer_size=6
+
+Step 7:
+  Theta values: [0.75 0.75 0.75], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=7
+
+Step 8:
+  Theta values: [0.75 0.75 0.75], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=8
+
+Step 9:
+  Theta values: [0.75 0.75 0.75], Chosen arm: 0
+  Learning: arm=0, reward=0.7, buffer_size=9
+
+Step 10:
+  Theta values: [0.75 0.75 0.75], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=10
+  ✓ Retrained model for arm 0
+
+Step 11:
+  Theta values: [0.61382095 0.75       0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=1
+
+Step 12:
+  Theta values: [0.66418348 0.75       0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=2
+
+Step 13:
+  Theta values: [0.9063365 0.75      0.75     ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=11
+
+Step 14:
+  Theta values: [0.71616044 0.75       0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=3
+
+Step 15:
+  Theta values: [0.66633261 0.75       0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=4
+
+Step 16:
+  Theta values: [0.69887937 0.75       0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=5
+
+Step 17:
+  Theta values: [0.94352134 0.75       0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=12
+
+Step 18:
+  Theta values: [0.83924366 0.75       0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=13
+
+Step 19:
+  Theta values: [0.82105009 0.75       0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.7, buffer_size=14
+
+Step 20:
+  Theta values: [0.97699558 0.75       0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=15
+
+Step 21:
+  Theta values: [0.87427155 0.75       0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=16
+
+Step 22:
+  Theta values: [0.79669604 0.75       0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.7, buffer_size=17
+
+Step 23:
+  Theta values: [0.68839265 0.75       0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.7, buffer_size=6
+
+Step 24:
+  Theta values: [0.61319669 0.75       0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=7
+
+Step 25:
+  Theta values: [0.71534345 0.75       0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=8
+
+Step 26:
+  Theta values: [0.44805994 0.75       0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=9
+
+Step 27:
+  Theta values: [0.99836759 0.75       0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=18
+
+Step 28:
+  Theta values: [0.51122992 0.75       0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=10
+  ✓ Retrained model for arm 1
+
+Step 29:
+  Theta values: [0.72251219 0.9907654  0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=11
+
+Step 30:
+  Theta values: [0.67890225 0.83234271 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=12
+
+Step 31:
+  Theta values: [0.78263002 0.92236728 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=13
+
+Step 32:
+  Theta values: [0.89301162 0.99759265 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.7, buffer_size=14
+
+Step 33:
+  Theta values: [0.94402922 0.87902383 0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=19
+
+Step 34:
+  Theta values: [0.83803191 0.89158624 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=15
+
+Step 35:
+  Theta values: [0.82163547 0.81785645 0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=20
+  ✓ Retrained model for arm 0
+
+Step 36:
+  Theta values: [0.874244   0.88708675 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=16
+
+Step 37:
+  Theta values: [0.79088289 0.82343543 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=17
+
+Step 38:
+  Theta values: [0.72949648 0.96064037 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=18
+
+Step 39:
+  Theta values: [0.89247087 0.92545379 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.7, buffer_size=19
+
+Step 40:
+  Theta values: [0.73417061 0.82577711 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=20
+  ✓ Retrained model for arm 1
+
+Step 41:
+  Theta values: [0.70713736 0.91306526 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=21
+
+Step 42:
+  Theta values: [0.91414517 0.74330926 0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=21
+
+Step 43:
+  Theta values: [0.78136308 0.88379084 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=22
+
+Step 44:
+  Theta values: [0.76339058 0.91554673 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=23
+
+Step 45:
+  Theta values: [0.57794665 0.92212445 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=24
+
+Step 46:
+  Theta values: [0.71968034 0.92679466 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=25
+
+Step 47:
+  Theta values: [0.8865207  0.80001644 0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=22
+
+Step 48:
+  Theta values: [0.83152386 0.84818375 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=26
+
+Step 49:
+  Theta values: [0.86901418 0.80188417 0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=23
+
+Step 50:
+  Theta values: [0.72863179 0.90828787 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.7, buffer_size=27
+
+
+Step 42:
+  Theta values: [0.91414517 0.74330926 0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=21
+
+Step 43:
+  Theta values: [0.78136308 0.88379084 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=22
+
+Step 44:
+  Theta values: [0.76339058 0.91554673 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=23
+
+Step 45:
+  Theta values: [0.57794665 0.92212445 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=24
+
+Step 46:
+  Theta values: [0.71968034 0.92679466 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=25
+
+Step 47:
+  Theta values: [0.8865207  0.80001644 0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=22
+
+Step 48:
+  Theta values: [0.83152386 0.84818375 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=26
+
+Step 49:
+  Theta values: [0.86901418 0.80188417 0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=23
+
+Step 50:
+  Theta values: [0.72863179 0.90828787 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.7, buffer_size=27
+
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=23
+
+Step 45:
+  Theta values: [0.57794665 0.92212445 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=24
+
+Step 46:
+  Theta values: [0.71968034 0.92679466 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=25
+
+Step 47:
+  Theta values: [0.8865207  0.80001644 0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=22
+
+Step 48:
+  Theta values: [0.83152386 0.84818375 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=26
+
+Step 49:
+  Theta values: [0.86901418 0.80188417 0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=23
+
+Step 50:
+  Theta values: [0.72863179 0.90828787 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.7, buffer_size=27
+
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=22
+
+Step 48:
+  Theta values: [0.83152386 0.84818375 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.8999999999999999, buffer_size=26
+
+Step 49:
+  Theta values: [0.86901418 0.80188417 0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=23
+
+Step 50:
+  Theta values: [0.72863179 0.90828787 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.7, buffer_size=27
+
+
+Step 49:
+  Theta values: [0.86901418 0.80188417 0.75      ], Chosen arm: 0
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=23
+
+Step 50:
+  Theta values: [0.72863179 0.90828787 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.7, buffer_size=27
+
+  Learning: arm=0, reward=0.8999999999999999, buffer_size=23
+
+Step 50:
+  Theta values: [0.72863179 0.90828787 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.7, buffer_size=27
+
+Step 50:
+  Theta values: [0.72863179 0.90828787 0.75      ], Chosen arm: 1
+  Learning: arm=1, reward=0.7, buffer_size=27
+
+  Learning: arm=1, reward=0.7, buffer_size=27
+
+
+==================================================
+==================================================
+Simulation complete!
+Average reward: 0.860
+Last 10 rewards: 0.880
+
+Simulation complete!
+Average reward: 0.860
+Last 10 rewards: 0.880
+
+
+Arms trained: [0, 1]

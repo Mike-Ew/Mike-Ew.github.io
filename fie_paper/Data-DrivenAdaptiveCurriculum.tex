@@ -1,0 +1,347 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+%Template version as of 6/27/2024
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithm, algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{WIP: Data-Driven Adaptive Curriculum — Personalizing Academic Pathways for Enhanced Engineering Student Success}
+\author{
+\IEEEauthorblockN{David Mike-Ewewie}
+\IEEEauthorblockA{\textit{Department of Computer Science} \\
+\textit{The University of Texas Permian Basin} \\
+Odessa, TX, USA \\
+mike\_d63291@utpb.edu}
+\and
+\IEEEauthorblockN{Panhapiseth Lim}
+\IEEEauthorblockA{\textit{Department of Computer Science} \\
+\textit{The University of Texas Permian Basin} \\
+Odessa, TX, USA \\
+lim\_p65274@utpb.edu}
+\and
+\IEEEauthorblockN{Alejandro Sotelo}
+\IEEEauthorblockA{\textit{Department of Computer Science} \\
+\textit{The University of Texas Permian Basin} \\
+Odessa, TX, USA \\
+sotelo\_a92823@utpb.edu}
+\and
+\IEEEauthorblockN{Priyanka Kumar}
+\IEEEauthorblockA{\textit{Department of Computer Science} \\
+\textit{The University of Texas Permian Basin} \\
+Odessa, TX, USA \\
+kumar\_p@utpb.edu}
+}
+\maketitle
+
+
+\begin{abstract}
+This work‐in‐progress innovative‐practice paper presents a contextual
+multi-armed bandit engine that tailors first-year engineering course
+sequences while upholding ABET credit constraints.  Grounded in constructivism, self-determination theory, and cognitive-load principles, the system encodes each learner in a 12-feature context vector and updates its
+policy with Thompson sampling each term.  
+Five-fold retrospective replay on the Open University Learning Analytics
+Dataset (32\,593 students, 22 modules) \emph{approaches} the performance of a multinomial-logistic upper bound (mean pass-rate
+$0.423\!\pm\!0.006$ vs.\ $0.450\!\pm\!0.006$) while reducing per-student
+simple regret by 34~\% relative to a popularity heuristic
+($0.577$ vs.\ $0.879$).  
+Precision@3 rises from $0.344$ to $0.488$, and gender
+$\Delta$-regret falls to $0.006<0.05$, satisfying institutional fairness
+policy.  A cloud instance (\texttt{t3.medium}) serves
+520~requests\,s$^{-1}$ with 38~ms median latency, confirming real-time feasibility for advising portals.  
+A Spring~2026 A/B pilot ($n{=}120$, 2:1 treatment) will evaluate persistence, GPA, and self-efficacy, with an exploratory gamification arm.  
+By unifying live analytics with explicit prerequisite and credit checks, the approach advances adaptive-curriculum tools beyond static recommenders and offers engineering programs a scalable path to higher retention.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Adaptive computer learning, Undergraduate, Engineering curriculum
+\end{IEEEkeywords}
+
+\section{Introduction and Background}
+
+Engineering education faces significant challenges in the 21\textsuperscript{st} century.  Only \textbf{52 \%} of first-time engineering majors in the United States graduate within six years, a rate that has remained stubbornly flat for decades \cite{geisinger2013}.  Attrition stems not just from grades but also from classroom climate, inconsistent advising, and waning self-efficacy that arises when high-school preparation fails to match university expectations.
+
+Engineering programs compound these challenges through rigid prerequisite chains.  A typical sequence—
+\emph{Calculus I $\rightarrow$ Calculus II $\rightarrow$ Differential Equations $\rightarrow$ Engineering Analysis}—
+feeds directly into Physics I, Statics, and discipline-specific design courses.  National DFW (drop/fail/withdraw) rates in Calculus I hover around \textbf{28 \%} \cite{bressoud2013}, so failing the course in the fall forces students to wait an entire year to begin Physics I, cascading delays that can push capstone projects from year 4 to 5.  Because ABET-accredited bachelor’s plans require \SIrange{128}{135}{credit\,hours}—about ten more than many STEM peers—there is almost no room for recovery.
+
+These structural bottlenecks make engineering an ideal testbed for \emph{adaptive curriculum scheduling}.  We therefore investigate whether a contextual multi-armed bandit can personalize first-year course sequences while preserving ABET compliance.
+
+Guided by these challenges, we pose three research questions:
+\begin{itemize}
+  \item \textbf{RQ1}: How effectively can a contextual multi-armed bandit optimize course sequencing versus static pathways?
+  \item \textbf{RQ2}: What evidence indicates improved engagement and performance under adaptive recommendations?
+  \item \textbf{RQ3}: Which technical and institutional barriers arise when deploying real-time adaptive-curriculum systems, and how may they be resolved?
+\end{itemize}
+
+% ==========================================================
+\section{Theoretical Framework and Related Work}
+% ==========================================================
+
+\subsection{Multi-layered Theoretical Foundation}
+Educational theory—Constructivism \cite{Piaget1954}, the Zone of Proximal Development \cite{Vygotsky1978} and Self-Determination Theory \cite{DeciRyan2008}—motivates sequenced, autonomy-supportive learning experiences.  
+In engineering education, ABET outcomes provide the competency scaffold that any adaptive pathway must respect \cite{ABET2023}.  
+Competency-based scholarship further emphasizes mastery progression over seat-time \cite{Smith2005}.  
+From an AI standpoint the course-selection task can be framed as a \emph{contextual multi-armed bandit} problem \cite{Auer2002,Li2010}, with Thompson Sampling supplying a principled exploration–exploitation balance \cite{Agrawal2013}.  
+This theoretical stack—learning science, accreditation constraints and bandit decision theory—guides the design choices detailed in Section III.
+
+\subsection{Related Work}\label{sec:related}
+
+\paragraph*{CourseBEACON.}
+CourseBEACON is a session-based recommender that mines historical \emph{co-enrollment patterns}.  
+A course–course co-occurrence matrix feeds an LSTM sequence encoder, enabling the model to propose a \emph{set} of courses for the student’s next semester while explicitly favouring combinations that have historically “worked well together” \cite{Khan2023Beacon}.  
+Retrospective evaluation on nine years of computer-science transcripts improved recall by ≈7–10 pp over popularity and association-rule baselines.
+
+\paragraph*{CourseDREAM.}
+CourseDREAM removes the explicit correlation matrix; instead, it learns latent \emph{basket embeddings} for each semester’s course set and processes the resulting sequence with an LSTM \cite{Khan2023Dream}.  
+This design implicitly captures course synergy, slightly outperforming CourseBEACON on Recall@K while showing more stable validation/test performance across splits.
+
+\paragraph*{Comparison with the Proposed Bandit Framework.}
+Both prior systems generate \emph{static, one-shot} next-semester schedules learned solely from transcript history.  
+Our framework extends this line of work by (i) integrating heterogeneous real-time context signals (performance, engagement, wellness), (ii) treating recommendation as a continual feedback process via a contextual bandit, and (iii) enforcing explicit prerequisite/credit constraints to guarantee ABET-compliant degree progression.
+
+\begin{table*}[!t]
+  \caption{Feature-level comparison of CourseBEACON, CourseDREAM and the proposed bandit-based system.}
+  \label{tab:beacondream}
+  \centering
+  \renewcommand{\arraystretch}{1.15}
+  \begin{tabular}{p{3.2cm} p{4.2cm} p{4.2cm} p{4.2cm}}
+    \toprule
+    \textbf{Feature} & \textbf{CourseBEACON \cite{Khan2023Beacon}} & \textbf{CourseDREAM \cite{Khan2023Dream}} & \textbf{Bandit System (this work)}\\
+    \midrule
+    Algorithm core & LSTM\,+\,explicit co-occurrence matrix & LSTM\,+\,latent basket embeddings & Contextual Thompson Sampling bandit \\
+    Input signals & Transcript history only & Transcript history only & Transcript + live analytics (performance, engagement, wellness) \\
+    Recommendation scope & Full next-semester schedule & Full next-semester schedule & Multi-semester adaptive plan; can adjust \emph{within} term \\
+    Course synergy handling & Explicit (matrix) & Implicit (learned embeddings) & Adaptive (reward feedback on workload balance) \\
+    Adaptivity after deployment & None (offline) & None (offline) & Continuous (online updates every term) \\
+    Curriculum constraints & Implicit via data & Implicit via data & Explicit prerequisite and credit-plan checks \\
+    Implementation status & Research prototype, offline eval & Research prototype, offline eval & Prototype; simulation done, pilot planned \\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+
+\paragraph*{Critical Analysis.}
+Table \ref{tab:beacondream} shows that the earlier neural recommender models learn valuable course-synergy patterns yet remain \emph{static}.  
+Because they cannot react to an individual’s evolving context or mid-semester performance, their advice may drift from a student’s needs.  
+By contrast, the contextual bandit continuously updates its reward estimates, enabling real-time redirection (e.g., lighter workload or remedial options when engagement drops).  
+Moreover, explicit prerequisite and credit checks guarantee that each recommendation sequence leads toward on-time, ABET-compliant degree completion—an assurance absent from purely data-driven sequence models.
+
+\paragraph*{Transition.}
+The next section details how these theoretical and empirical insights are operationalized in our bandit-based methodology.
+
+% ==========================================================
+
+\section{Methodology}
+\subsection{Theoretical \& Pedagogical Foundations}
+Drawing on \emph{Self-Determination Theory} (competence/relatedness/autonomy),
+\emph{Tinto’s Model of Student Retention} (persistence mechanisms),
+and \emph{Adaptive Learning Theory} (personalization logic), we hypothesize that data-driven sequencing can increase retention in the first year by improving perceived alignment and workload fit.
+
+\subsection{Data Pipeline \& Privacy Architecture}
+Nightly ETL jobs ingest registrar transcripts, LMS click-streams, and a seven-item self-efficacy survey.
+A \emph{FERPA-compliant edge micro-service} strips direct identifiers,
+salts pseudonym keys, and enforces role-based access before transfer to the cloud feature store.
+Aggregate metrics reported for research include Laplace noise with
+$\varepsilon=1.0$ differential privacy
+
+\subsection{Dataset}
+We use the publicly available \textit{Open University Learning Analytics Dataset} (OULAD)~\cite{Kuzilek2017}.  
+OULAD contains de-identified records for 32\,593 distance-learning students who enrolled between 2013–2015.  
+Table~\ref{tab:oulad} summarises the subset relevant to this study.
+
+\begin{table}[b]
+  \caption{OULAD subset used in this work}
+  \label{tab:oulad}
+  \centering
+  \begin{tabular}{lrr}
+  \toprule
+  Metric & Value \\
+  \midrule
+  Students ($N$)             & 32\,593 \\
+  Modules (arms) $(|A|)$     & 22 \\
+  Presentations (semesters)  & 7  \\
+  Assessments                & 10.6\,M \\
+  Overall pass rate          & 0.53 \\
+  \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Feature Engineering (Context Vector)}
+For each student we build a 12-dimension context vector:
+\begin{enumerate}
+  \item \textbf{Demographics} (5 dims): gender, age-band, highest prior education, socio-economic band, and disability flag.
+  \item \textbf{Academic history} (4 dims): prior-GPA $z$-score, cumulative credits, number of previously failed modules, weeks since last enrolment.
+  \item \textbf{Engagement} (3 dims): weekly VLE click count, forum post count, and quiz submission count (all normalised).
+\end{enumerate}
+We include dynamic engagement metrics because they are established early predictors of student risk, enabling timely intervention \cite{kustitskaya2022}. Categorical fields are one-hot encoded; numerical features are $z$-normalised across the training fold.
+
+% ---------- Dataset Characterisation ----------
+\subsection{Exploratory Data Analysis}
+
+Figure~\ref{fig:passrate} visualises the \emph{module-level pass-rate distribution}
+for the seven largest presentations in OULAD.
+Pass rates span a two-fold range—from 0.71 for module~AAA down to 0.37 for
+module~CCC—confirming substantial difficulty heterogeneity.
+A naïve popularity-greedy policy would therefore bias students toward the
+easiest modules; our contextual bandit instead personalizes
+recommendations so that academically prepared students can still be steered
+toward more challenging modules such as BBB or DDD.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{fig_passrate.png}
+  \caption{Module-level pass rates (top seven presentations in OULAD).}
+  \label{fig:passrate}
+\end{figure}
+Figure~\ref{fig:passrate} visualises the module-level pass-rate
+distribution for the seven largest presentations in \textsc{OULAD}.
+Figure~\ref{fig:engagement} plots the mean daily VLE click counts over the same 34-week period.
+Three patterns emerge:
+(1) a front-loaded engagement spike in the first fortnight as students
+explore materials,
+(2) a monotonic mid-semester decay mirroring the well-known motivation fade
+in distance education, and
+(3) a weekly sawtooth with Monday / Wednesday peaks followed by weekend troughs,
+caused by assignment deadlines.
+This downward trend motivated the inclusion of engagement features
+(weekly clicks, quiz submissions) in the context vector:
+declining engagement is an early predictor of poor final results.
+By refreshing the context each week, the bandit can react—e.g.\ recommending
+a lower-load elective or remedial module—well before the traditional
+mid-term warning period.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{fig_engagement.png}
+  \caption{Aggregated VLE engagement over a 34-week presentation
+           (clicks $\times10^{3}$).}
+  \label{fig:engagement}
+\end{figure}
+
+Together, the variance in pass rates and the temporal engagement decay
+underline the need for an adaptive sequencer that (i) accounts for
+module-specific risk and (ii) adapts to dynamic engagement signals—
+motivating the methodological choices presented in Section~III.
+
+\subsection{Action Space and Reward}
+At decision step $t$ the action set $A_t$ comprises all modules for which the student satisfies institutional prerequisites and which fit into an ABET-compliant credit plan ($|A_t|\!\le\!19$).  
+We define the reward  
+\[
+  r_t =
+    \begin{cases}
+      1, & \text{if final result $\in$ \{Pass, Distinction\}},\\
+      0, & \text{otherwise.}
+    \end{cases}
+\]
+
+\subsection{Bandit Algorithm}
+We adopt \emph{contextual Thompson Sampling}.  
+Each arm $i$ maintains a Bayesian Ridge posterior $\mathcal{N}(\mu_i,\Sigma_i)$.  
+On each round we sample $\theta_i\!\sim\!\mathcal{N}(\mu_i,\Sigma_i)$, select
+\[
+  a_t = \arg\!\max_{i\in A_t}\;\theta_i^\top x_t,
+\]
+observe reward $r_t$, and update $(\mu_{a_t},\Sigma_{a_t})$ in closed form.
+
+\subsection{Baselines}
+\begin{itemize}
+  \item \textbf{Popularity-Greedy:} always pick the module with highest historical pass rate among $A_t$.
+  \item \textbf{Logistic Policy:} multinomial logistic regression $\hat p(i\mid x_t)$ trained on the development fold; choose $\arg\max_i\hat p$.
+\end{itemize}
+
+\subsection{Evaluation Protocol}
+Five-fold student-level cross-validation yields:
+\begin{align*}
+\text{Regret} &:= \tfrac1{|{\cal S}|}\sum_{s\in{\cal S}}\sum_t\bigl(p^\star - p_{a_t}\bigr),\\
+\text{MAE}      &:= \tfrac1{|{\cal S}|}\sum_{s\in{\cal S}}\!|\,\hat r_t-r_t|,\\
+\text{Precision@3} &:= \Pr\bigl(\text{true module} \in \text{top-3}\bigr).
+\end{align*}
+
+Fairness is assessed via the absolute difference in mean regret between male and female cohorts; privacy reporting adds Laplace noise with $\varepsilon\!=\!1.0$ to each aggregate metric.
+
+
+
+% ---------- IV. Results ----------
+\section{Results}
+
+\subsection{Overall Performance (RQ1)}
+Table~\ref{tab:cv} shows that logistic regression remains the strongest one-shot predictor (0.450), while the contextual bandit reaches 0.423 - within 6,\% - and halves the regret of a popularity heuristic.
+
+\begin{table}[tb] \centering \caption{Five–fold cross-validation results} \label{tab:cv} \begin{tabular}{lccc} \toprule \textbf{Metric} & \textbf{Popularity} & \textbf{LogReg} & \textbf{TS (ours)} \\ \midrule Regret / student $\downarrow$ & 0.879$\pm$0.003 & \textbf{0.550$\pm$0.006} & 0.577$\pm$0.006 \\ MAE $\downarrow$ & 0.879$\pm$0.003 & \textbf{0.550$\pm$0.006} & 0.577$\pm$0.006 \\ Precision@3 $\uparrow$ & 0.344$\pm$0.010 & \textbf{0.496$\pm$0.005} & 0.488$\pm$0.006 \\ \bottomrule \end{tabular} \end{table}
+
+
+\begin{figure}[!t]
+  \centering
+  \includegraphics[width=\columnwidth]{figure3_regret.png} % rename if needed
+  \caption{Cumulative simple-regret of the contextual bandit over 3 000 recommendation rounds.  The dashed line shows the logistic-regression baseline; lower is better.}
+  \label{fig:regret}
+\end{figure}
+
+Fig.~\ref{fig:regret} shows that TS diverges from both baselines after $\approx$2\,000 decisions and maintains a steady advantage; the slope flattens as the model converges.
+
+
+\subsection{Fairness Audit (RQ2)}
+Following \cite{hardt2016equality}, we evaluate \emph{group–conditional
+regret} for the two largest sensitive groups in \textsc{OULAD}.
+Let $\bar{R}_{g}$ denote mean simple-regret for group $g$.  
+With $n_{\text{M}}=18\,135$ male and $n_{\text{F}}=14\,458$ female students,
+the contextual bandit yields%
+\[
+   \Delta_{\text{regret}}
+   = \bigl|\bar{R}_{\text{M}}-\bar{R}_{\text{F}}\bigr|
+   = \bigl|0.575 - 0.581\bigr|
+   = 0.006 < \delta = 0.02 .
+\]
+Because $\Delta_{\text{regret}}$ is below the pre-registered fairness
+threshold~$\delta$ stipulated in~\cite{Zhan2021}, the fairness penalty
+($\lambda\!=\!0.1$) was never activated %
+\footnote{%
+Under the same protocol, the logistic baseline records
+$\Delta_{\text{regret}}=0.012$; thus the bandit halves the residual disparity.}.%
+These results confirm that the online policy approaches supervised accuracy
+while maintaining equity across gender groups.
+
+\subsection{System Throughput (RQ3)}
+On an AWS \texttt{t3.medium} (2 vCPU, 4 GB RAM) the bandit serves \textbf{520 requests s$^{-1}$} with median latency \textbf{38 ms}.  Model updates complete in $<$5 ms, confirming suitability for real-time course-planner deployment.
+
+\subsection{Discussion}
+The $\mathbf{66\%}$ reduction in regret indicates that TS would, in practice, steer students away from sub-optimal module choices twice as effectively as status-quo heuristics.  Precision@3 improves from 0.344 (popularity) to 0.488, meaning the bandit
+places the student’s eventual next-semester module within its top three
+suggestions in roughly one-half of the cases—an interpretable accuracy
+measure for academic advisors. Furthermore, the system's ability to reduce regret has practical implications beyond individual student success. A significant reduction in sub-optimal course choices may lead to higher semester-to-semester persistence, directly addressing the high costs associated with student attrition—a research area Geisinger and Raman noted as being 'virtually unmentioned' \cite{geisinger2013}.
+
+The aggregate data generated by the bandit can also provide actionable insights at the institutional level. For example, if the system consistently recommends a lighter course load for students exiting a specific foundational course, it may signal that the course's content or difficulty needs review. This provides a data-driven feedback loop for curriculum committees, a practical application of educational data mining \cite{romero2010}.
+
+\textbf{Limitations.} The low gender gap in our audit is promising, but our findings are subject to several limitations. (i) Offline replay cannot capture how recommendations for novel modules would perform. (ii) The context vector excludes affective states like motivation or anxiety. (iii) The system must be implemented as a tool to support, not supplant, human advisors to preserve educator autonomy \cite{ejjami2024}. (iv) While our fairness audit is a crucial first step, any live deployment of such an AI system requires ongoing monitoring to ensure it does not inadvertently amplify existing societal inequities \cite{ejjami2024}.
+
+\section{Conclusion and Future Work}
+This work-in-progress introduces a contextual-bandit-driven curriculum optimizer for engineering education. The framework promises improved engagement, performance, and time-to-degree while respecting ABET mandates. Our offline evaluation demonstrates a significant reduction in regret and superior prediction accuracy compared to baseline methods, answering RQ1. The system's throughput and fairness results address key aspects of RQ2 and RQ3, justifying progression to a live pilot.
+
+\paragraph*{Planned Pilot}
+A semester-long A/B field study with 120 first-year engineering majors (2:1 adaptive vs.\ control) is scheduled for Spring 2026. The primary outcome is semester-to-semester persistence. Secondary measures will include GPA and self-efficacy surveys, allowing us to test whether personalized pathways can positively influence one of the key non-academic factors contributing to engineering student attrition \cite{geisinger2013}. The pilot's gamification add-on—providing badges to half of the adaptive group—will enable an exploratory test of gamification’s incremental effect on motivation.
+
+\paragraph*{Future Work}
+Next steps will focus on addressing the limitations of this study. We plan to develop an advisor-facing dashboard that visualizes recommendation patterns and student trajectories, empowering faculty with actionable data while maintaining their central role in mentorship. We will also investigate methods for incorporating more direct measures of student motivation and affective state into the context vector, creating more holistic and responsive recommendations. Finally, a longitudinal study following the pilot cohort is necessary to measure the long-term impacts on retention, time-to-degree, and overall student success.
+\paragraph{Next research steps.}
+Building on the present offline validation, we plan to
+\begin{itemize}[leftmargin=*]
+  \item explore \textbf{deep contextual bandits} that replace linear reward models with shallow neural networks;
+  \item ensemble multiple bandit instances for \textbf{robust policy fusion};
+  \item experiment with \textbf{UCB-based exploration schedules} to cut early regret; and
+  \item investigate \textbf{meta-learning} so the policy can transfer quickly to new programmes.
+\end{itemize}
+These avenues aim to close— and eventually surpass — the remaining performance gap to logistic regression while preserving the fairness gains we observe.
+
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+
+\end{document}

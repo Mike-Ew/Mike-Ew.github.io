@@ -126,6 +126,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentPath = 'all';
     let currentMode = 'corporate';
     
+    // Initialize first mode button as active
+    if (modeButtons.length > 0) {
+        modeButtons[0].classList.add('active');
+    }
+    
     // Path button click handler
     pathButtons.forEach(btn => {
         btn.addEventListener('click', function() {
@@ -143,6 +148,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mode button click handler
     modeButtons.forEach(btn => {
         btn.addEventListener('click', function() {
+            // Remove active class from all mode buttons
+            modeButtons.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+            
             currentMode = this.getAttribute('data-mode');
             updateContent();
         });
@@ -223,10 +233,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Filter projects based on selected path
     function filterProjects() {
         const projects = document.querySelectorAll('.project-card');
+        console.log(`Filtering projects for path: ${currentPath}`);
         projects.forEach(project => {
             const projectPaths = project.getAttribute('data-paths')?.split(',') || ['all'];
             if (currentPath === 'all' || projectPaths.includes(currentPath)) {
-                project.style.display = 'block';
+                project.style.display = '';
+                project.style.opacity = '1';
+                project.style.transform = 'translateY(0)';
             } else {
                 project.style.display = 'none';
             }
