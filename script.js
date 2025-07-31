@@ -90,34 +90,42 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Mobile menu toggle (for future enhancement)
-function createMobileMenu() {
+// Mobile menu toggle
+function initMobileMenu() {
     const navbar = document.querySelector('.navbar .container');
+    const navLinks = document.querySelector('.nav-links');
     const menuButton = document.createElement('button');
     menuButton.className = 'mobile-menu-toggle';
     menuButton.innerHTML = '<i class="fas fa-bars"></i>';
-    menuButton.style.display = 'none';
+    menuButton.setAttribute('aria-label', 'Toggle navigation menu');
     
-    // Add mobile menu styles
-    const mobileStyle = document.createElement('style');
-    mobileStyle.textContent = `
-        @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: block !important;
-                background: none;
-                border: none;
-                font-size: 1.5rem;
-                color: var(--text-color);
-                cursor: pointer;
-            }
+    // Toggle menu on button click
+    menuButton.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        const isOpen = navLinks.classList.contains('active');
+        menuButton.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navbar.contains(e.target) && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+            menuButton.innerHTML = '<i class="fas fa-bars"></i>';
         }
-    `;
-    document.head.appendChild(mobileStyle);
+    });
+    
+    // Close menu when clicking a link
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            menuButton.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+    });
     
     navbar.appendChild(menuButton);
 }
 
-createMobileMenu();
+initMobileMenu();
 
 // Path Selector Functionality
 document.addEventListener('DOMContentLoaded', function() {
