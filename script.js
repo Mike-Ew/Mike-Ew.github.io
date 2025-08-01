@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const stats = document.querySelectorAll('.hero-stats .stat');
         const pathStats = {
             all: [
-                { number: '5', label: 'Certifications' },
+                { number: '6', label: 'Certifications' },
                 { number: '3+', label: 'Publications' },
                 { number: '520', label: 'Requests/sec' }
             ],
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 { number: '3+', label: 'Papers' }
             ],
             devops: [
-                { number: '5', label: 'Certifications' },
+                { number: '6', label: 'Certifications' },
                 { number: '24/7', label: 'Monitoring' },
                 { number: 'K8s', label: 'Expertise' }
             ],
