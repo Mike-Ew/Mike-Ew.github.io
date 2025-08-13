@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiva Trading Infrastructure | David Mike-Ewewie</title>
+    <meta name="description" content="Building the engine for a high-frequency trading firm - low-latency ML infrastructure from the ground up.">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">DME</div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="index.html">Projects</a></li>
+                <li><a href="../blog/index.html">Blog</a></li>
+                <li><a href="../resume.html">Resume</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Project Detail -->
+    <article class="project-detail">
+        <div class="container">
+            <div class="project-header">
+                <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                <h1>Chiva Technologies - Trading Infrastructure</h1>
+                <p class="project-tagline">Building the engine for a high-frequency trading firm, solo. I architected the low-latency infrastructure and MLOps pipeline from the ground up to handle the extreme demands of real-time algorithmic trading.</p>
+                <div class="project-meta">
+                    <span class="project-status">Production</span>
+                    <span class="project-date">October 2022 - October 2023</span>
+                    <span class="project-role">ML Infrastructure Engineer</span>
+                </div>
+            </div>
+
+            <section class="project-section">
+                <h2><i class="fas fa-exclamation-circle"></i> The Challenge</h2>
+                <div class="challenge-grid">
+                    <div class="challenge-item">
+                        <h3>Extreme Performance Requirements</h3>
+                        <p>High-frequency trading demands sub-10ms latency for predictions. Every millisecond of delay directly translates to lost opportunities and reduced profitability in competitive markets.</p>
+                    </div>
+                    <div class="challenge-item">
+                        <h3>Solo Development Under Pressure</h3>
+                        <p>Tasked with building the entire MLOps pipeline with minimal support, requiring full-stack ownership from infrastructure to API development that would typically require a full team.</p>
+                    </div>
+                    <div class="challenge-item">
+                        <h3>Zero Tolerance for Failure</h3>
+                        <p>In algorithmic trading, system failures mean immediate financial losses. The infrastructure needed to be fault-tolerant with automatic failover and recovery mechanisms.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2><i class="fas fa-cogs"></i> The Process & My Contribution</h2>
+                <p class="section-intro">This was a trial-by-fire experience that forced rapid development of full-stack capabilities under extreme performance constraints.</p>
+                
+                <div class="process-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">1</div>
+                        <div class="timeline-content">
+                            <h3>Infrastructure Architecture</h3>
+                            <p>Designed and implemented low-latency C++ infrastructure optimized for high-frequency trading. Built custom memory pools, lock-free data structures, and zero-copy message passing to minimize latency.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2</div>
+                        <div class="timeline-content">
+                            <h3>MLOps Pipeline Development</h3>
+                            <p>Created end-to-end pipeline for model training, validation, and deployment. Implemented A/B testing framework for safe model rollouts with automatic rollback on performance degradation.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">3</div>
+                        <div class="timeline-content">
+                            <h3>Real-time Prediction System</h3>
+                            <p>Built distributed prediction system handling 1M+ daily predictions with sub-10ms latency. Implemented circuit breakers and rate limiting to prevent cascade failures during market volatility.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">4</div>
+                        <div class="timeline-content">
+                            <h3>API Development & Testing</h3>
+                            <p>Developed and tested REST and WebSocket APIs for real-time data streaming and model inference. Created comprehensive test suites simulating various market conditions and edge cases.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2><i class="fas fa-microchip"></i> Architecture & Technical Deep Dive</h2>
+                
+                <h3>System Architecture</h3>
+                <p>The trading infrastructure was built as a distributed, event-driven system optimized for minimal latency and maximum throughput.</p>
+                
+                <div class="architecture-components">
+                    <div class="component">
+                        <h4><i class="fas fa-bolt"></i> Market Data Ingestion</h4>
+                        <p>Custom C++ components directly interfacing with exchange feeds, processing millions of market events per second with nanosecond-precision timestamps.</p>
+                    </div>
+                    
+                    <div class="component">
+                        <h4><i class="fas fa-brain"></i> ML Inference Engine</h4>
+                        <p>Optimized Python/C++ hybrid system using ONNX Runtime for model inference, with custom kernels for performance-critical operations.</p>
+                    </div>
+                    
+                    <div class="component">
+                        <h4><i class="fas fa-database"></i> Time-Series Database</h4>
+                        <p>High-performance time-series storage using InfluxDB for historical data and Redis for real-time caching with sub-millisecond access times.</p>
+                    </div>
+                    
+                    <div class="component">
+                        <h4><i class="fas fa-chart-line"></i> Risk Management</h4>
+                        <p>Real-time position tracking and risk calculation with automated circuit breakers to prevent excessive exposure during abnormal market conditions.</p>
+                    </div>
+                </div>
+
+                <h3>Performance Optimizations</h3>
+                <div class="optimization-list">
+                    <div class="optimization-item">
+                        <strong>Memory Management:</strong> Custom allocators and memory pools to eliminate allocation overhead during trading hours
+                    </div>
+                    <div class="optimization-item">
+                        <strong>CPU Affinity:</strong> Pinned critical threads to specific CPU cores to minimize context switching and cache misses
+                    </div>
+                    <div class="optimization-item">
+                        <strong>Network Optimization:</strong> Kernel bypass networking using DPDK for ultra-low latency packet processing
+                    </div>
+                    <div class="optimization-item">
+                        <strong>Model Optimization:</strong> Quantization and pruning techniques reducing model size by 75% without accuracy loss
+                    </div>
+                </div>
+
+                <h3>Tech Stack</h3>
+                <div class="tech-stack-grid">
+                    <div class="tech-category">
+                        <h4>Core Infrastructure</h4>
+                        <span class="tech-tag">C++17</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">DPDK</span>
+                        <span class="tech-tag">ZeroMQ</span>
+                    </div>
+                    <div class="tech-category">
+                        <h4>ML/AI</h4>
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">ONNX Runtime</span>
+                        <span class="tech-tag">XGBoost</span>
+                        <span class="tech-tag">NumPy</span>
+                    </div>
+                    <div class="tech-category">
+                        <h4>Data & Storage</h4>
+                        <span class="tech-tag">Redis</span>
+                        <span class="tech-tag">InfluxDB</span>
+                        <span class="tech-tag">Apache Kafka</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                    </div>
+                    <div class="tech-category">
+                        <h4>DevOps & Monitoring</h4>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Kubernetes</span>
+                        <span class="tech-tag">Prometheus</span>
+                        <span class="tech-tag">Grafana</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2><i class="fas fa-trophy"></i> Outcomes & Impact</h2>
+                <div class="outcome-stats">
+                    <div class="outcome-stat">
+                        <div class="stat-number"><10ms</div>
+                        <div class="stat-label">Prediction Latency</div>
+                    </div>
+                    <div class="outcome-stat">
+                        <div class="stat-number">1M+</div>
+                        <div class="stat-label">Daily Predictions</div>
+                    </div>
+                    <div class="outcome-stat">
+                        <div class="stat-number">40%</div>
+                        <div class="stat-label">Cost Reduction</div>
+                    </div>
+                    <div class="outcome-stat">
+                        <div class="stat-number">3x</div>
+                        <div class="stat-label">Throughput Increase</div>
+                    </div>
+                </div>
+                
+                <div class="impact-list">
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p><strong>Extreme Performance:</strong> Achieved consistent sub-10ms latency for model inference in production trading environment</p>
+                    </div>
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p><strong>Scale Achievement:</strong> System successfully processed over 1 million predictions daily without degradation</p>
+                    </div>
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p><strong>Cost Optimization:</strong> Reduced infrastructure costs by 40% through efficient resource utilization and optimization</p>
+                    </div>
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p><strong>Reliability:</strong> Maintained 99.95% uptime during market hours with automatic failover mechanisms</p>
+                    </div>
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p><strong>Full-Stack Ownership:</strong> Successfully delivered complete system as solo developer, demonstrating end-to-end capabilities</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2><i class="fas fa-lightbulb"></i> Key Learnings</h2>
+                <p class="section-intro">This trial-by-fire experience provided accelerated learning in end-to-end system ownership under extreme constraints.</p>
+                
+                <ul class="learnings-list">
+                    <li><strong>Systems Thinking Under Pressure:</strong> Learned to design self-contained systems where feedback loops are immediate and unforgiving</li>
+                    <li><strong>Performance Engineering:</strong> Developed deep expertise in low-level optimization techniques critical for HFT environments</li>
+                    <li><strong>Full-Stack Development:</strong> Gained experience across entire stack from kernel-level networking to API design</li>
+                    <li><strong>Risk Management:</strong> Understood importance of defensive programming and fail-safe mechanisms in financial systems</li>
+                    <li><strong>Solo Ownership:</strong> Demonstrated ability to deliver complex systems independently under tight deadlines</li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2><i class="fas fa-rocket"></i> Future Vision</h2>
+                <p>While the project achieved its technical objectives during the contract period, there remains significant untapped potential. The underlying technology and architecture built during this engagement forms a solid foundation for next-generation trading systems. Active discussions are underway regarding future opportunities to fully realize the vision of this platform.</p>
+            </section>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 David Mike-Ewewie. Building the future, one model at a time.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
