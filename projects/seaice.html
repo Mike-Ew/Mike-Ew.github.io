@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arctic Sea Ice Classification | David Mike-Ewewie</title>
+    <meta name="description" content="Building a planetary-scale perception system using Vision Transformers for Arctic sea ice classification.">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">DME</div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="index.html">Projects</a></li>
+                <li><a href="../blog/index.html">Blog</a></li>
+                <li><a href="../resume.html">Resume</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Project Detail -->
+    <article class="project-detail">
+        <div class="container">
+            <div class="project-header">
+                <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                <h1>Arctic Sea Ice Classification (TSViT)</h1>
+                <p class="project-tagline">Building a planetary-scale perception system that uses Vision Transformers to see through clouds and darkness, providing mission-critical intelligence on Arctic sea ice.</p>
+                <div class="project-meta">
+                    <span class="project-status">Research Project</span>
+                    <span class="project-date">2024 - Present</span>
+                    <a href="https://github.com/Mike-Ew/seaice" class="github-link" target="_blank">
+                        <i class="fab fa-github"></i> View Code
+                    </a>
+                </div>
+            </div>
+
+            <section class="project-section">
+                <h2><i class="fas fa-exclamation-circle"></i> The Challenge</h2>
+                <div class="challenge-grid">
+                    <div class="challenge-item">
+                        <h3>Massive Datasets</h3>
+                        <p>The AI4ARCTIC dataset exceeds 500GB, making standard download methods impractical and prone to failure. Required building robust, programmatic solutions for reliable data acquisition.</p>
+                    </div>
+                    <div class="challenge-item">
+                        <h3>Data Imbalance</h3>
+                        <p>Severe lack of high-density sea ice examples in the training data negatively affected early model performance, requiring architectural innovations to overcome.</p>
+                    </div>
+                    <div class="challenge-item">
+                        <h3>Multi-Modal Complexity</h3>
+                        <p>Fusing optical, SAR, and meteorological data streams while maintaining temporal consistency presented significant technical challenges.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2><i class="fas fa-cogs"></i> The Process & My Contribution</h2>
+                <div class="process-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">1</div>
+                        <div class="timeline-content">
+                            <h3>Framework Modernization</h3>
+                            <p>Upgraded the entire deep learning framework to a modern stack (Python 3.11, PyTorch 2.1+), ensuring compatibility and performance. This involved rewriting legacy code and establishing new development standards.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2</div>
+                        <div class="timeline-content">
+                            <h3>Robust Data Pipeline</h3>
+                            <p>Developed a custom API client to programmatically download and manage the massive AI4ARCTIC dataset. Implemented retry logic, checkpointing, and parallel downloads to ensure reliability.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">3</div>
+                        <div class="timeline-content">
+                            <h3>HPC Environment Setup</h3>
+                            <p>Configured the software environment and data pipelines for large-scale training on the 224-core university HPC cluster. Wrote SLURM scripts for efficient job scheduling and resource allocation.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">4</div>
+                        <div class="timeline-content">
+                            <h3>Model Evolution</h3>
+                            <p>Researched and implemented the state-of-the-art TSViT model, evolving from a single-modal baseline (v1) to temporal analysis (v2), with plans for full multi-modal fusion (v3).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2><i class="fas fa-microchip"></i> Architecture & Technical Deep Dive</h2>
+                
+                <h3>Why Temporal-Spatial Vision Transformer (TSViT)?</h3>
+                <p>The choice of Vision Transformer architecture was inspired by its success in remote sensing domains. The project aims to replicate that success while incorporating advanced explainability features from Swin Transformer variants.</p>
+                
+                <div class="architecture-evolution">
+                    <div class="evolution-stage">
+                        <h4>V1 - Single Modality Baseline</h4>
+                        <p>Initial implementation focused on single data modality to establish performance baseline.</p>
+                    </div>
+                    <div class="evolution-stage">
+                        <h4>V2 - Temporal Analysis</h4>
+                        <p>Evolution to leverage temporal dimension, moving from purely spatial to spatio-temporal analysis. This was key to overcoming data imbalances.</p>
+                    </div>
+                    <div class="evolution-stage">
+                        <h4>V3 - Multi-Modal Fusion (Future)</h4>
+                        <p>Next stage: full multi-modal approach fusing optical, SAR, and meteorological data for comprehensive classification.</p>
+                    </div>
+                </div>
+
+                <h3>Tech Stack</h3>
+                <div class="tech-stack-grid">
+                    <div class="tech-category">
+                        <h4>Core Framework</h4>
+                        <span class="tech-tag">Python 3.11</span>
+                        <span class="tech-tag">PyTorch 2.1+</span>
+                        <span class="tech-tag">CUDA 12.1</span>
+                    </div>
+                    <div class="tech-category">
+                        <h4>ML Libraries</h4>
+                        <span class="tech-tag">einops</span>
+                        <span class="tech-tag">transformers</span>
+                        <span class="tech-tag">timm</span>
+                    </div>
+                    <div class="tech-category">
+                        <h4>Data Handling</h4>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">Xarray</span>
+                        <span class="tech-tag">NetCDF/Zarr</span>
+                    </div>
+                    <div class="tech-category">
+                        <h4>HPC & Orchestration</h4>
+                        <span class="tech-tag">SLURM</span>
+                        <span class="tech-tag">Bash</span>
+                        <span class="tech-tag">Conda</span>
+                    </div>
+                </div>
+
+                <h3>Data Pipeline Architecture</h3>
+                <div class="pipeline-steps">
+                    <div class="pipeline-step">
+                        <h4>1. Programmatic Download</h4>
+                        <p>Custom Python script interfacing with data provider's API for reliable, sequential download of hundreds of gigabytes.</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <h4>2. Data Staging & Preprocessing</h4>
+                        <p>Raw satellite data (SAR, optical, meteorological) staged on HPC cluster. Preprocessing includes normalization, temporal alignment, and spatio-temporal patch extraction.</p>
+                    </div>
+                    <div class="pipeline-step">
+                        <h4>3. Efficient Loading</h4>
+                        <p>Custom PyTorch Dataset and DataLoader classes for efficient patch loading, data augmentation, and GPU feeding to ensure no idle time.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2><i class="fas fa-trophy"></i> Outcomes & Impact</h2>
+                <div class="outcome-stats">
+                    <div class="outcome-stat">
+                        <div class="stat-number">98.4%</div>
+                        <div class="stat-label">Test Accuracy</div>
+                    </div>
+                    <div class="outcome-stat">
+                        <div class="stat-number">500GB+</div>
+                        <div class="stat-label">Dataset Processed</div>
+                    </div>
+                    <div class="outcome-stat">
+                        <div class="stat-number">224</div>
+                        <div class="stat-label">HPC Cores Utilized</div>
+                    </div>
+                </div>
+                
+                <div class="impact-list">
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p>Evolution from single-modal to temporal approach was critical in overcoming data imbalance issues</p>
+                    </div>
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p>Foundation for upcoming research paper on multi-modal sea ice classification</p>
+                    </div>
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p>End-to-end case study in building AI systems for critical environmental monitoring</p>
+                    </div>
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p>Prepared for distributed training using PyTorch DDP for even larger experiments</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2><i class="fas fa-rocket"></i> Future Work</h2>
+                <ul class="future-list">
+                    <li>Implement full multi-modal fusion architecture (V3)</li>
+                    <li>Scale to distributed training across multiple nodes</li>
+                    <li>Incorporate explainability features from Swin Transformer</li>
+                    <li>Submit paper to top-tier conference (Target: August 31, 2025)</li>
+                    <li>Deploy edge-optimized version for real-time maritime applications</li>
+                </ul>
+            </section>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 David Mike-Ewewie. Building the future, one model at a time.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
