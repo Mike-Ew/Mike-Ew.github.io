@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Library Intelligence Platform | David Mike-Ewewie</title>
+    <meta name="description" content="Building a university library's digital nervous system - transforming 400k+ volumes into actionable intelligence.">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">DME</div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="index.html">Projects</a></li>
+                <li><a href="../blog/index.html">Blog</a></li>
+                <li><a href="../resume.html">Resume</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Project Detail -->
+    <article class="project-detail">
+        <div class="container">
+            <div class="project-header">
+                <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                <h1>Smart Library Intelligence Platform (rprice)</h1>
+                <p class="project-tagline">Unlocking the hidden intelligence of a university library by building its 'digital nervous system' - an end-to-end platform managing 400k+ volumes via high-throughput data pipeline with real-time sensor networks providing holistic operational intelligence.</p>
+                <div class="project-meta">
+                    <span class="project-status">Innovation Lab</span>
+                    <span class="project-date">2024 - Present</span>
+                    <span class="project-role">Lead Architect & Developer</span>
+                </div>
+            </div>
+
+            <section class="project-section">
+                <h2><i class="fas fa-exclamation-circle"></i> The Challenge</h2>
+                <div class="challenge-grid">
+                    <div class="challenge-item">
+                        <h3>Data Blindness</h3>
+                        <p>University libraries operate on anecdotal evidence rather than data, leading to inefficient resource allocation, underutilized spaces, and disconnect from actual student needs.</p>
+                    </div>
+                    <div class="challenge-item">
+                        <h3>Massive Catalog Scale</h3>
+                        <p>Managing and enriching metadata for 400,000+ volumes requires processing 10M+ API calls while handling memory constraints and rate limits efficiently.</p>
+                    </div>
+                    <div class="challenge-item">
+                        <h3>Privacy vs Intelligence</h3>
+                        <p>Need to gather operational intelligence about space usage and patterns while maintaining strict privacy standards - no personally identifiable information collection.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2><i class="fas fa-cogs"></i> The Process & My Contribution</h2>
+                <p class="section-intro">This project evolved from a simple data-enrichment script into a full-scale intelligence platform through systematic thinking and iterative development.</p>
+                
+                <div class="process-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">1</div>
+                        <div class="timeline-content">
+                            <h3>System Architecture Design</h3>
+                            <p>Designed entire multi-stage architecture from data ingestion pipeline to CV-powered sensor network, ensuring each component feeds into a holistic system for actionable intelligence.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2</div>
+                        <div class="timeline-content">
+                            <h3>Data Pipeline Engineering</h3>
+                            <p>Built robust Python pipeline handling 10M+ API calls. When initial processing crashed at 110,000 ISBNs due to memory constraints, re-engineered to flush results in 350-record batches, ensuring stability.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">3</div>
+                        <div class="timeline-content">
+                            <h3>Computer Vision Integration</h3>
+                            <p>Expanded scope to include YOLOv8 for anonymous foot traffic analysis and MLX90640 thermal sensors for privacy-preserving occupancy tracking, aligning with thesis requirements.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">4</div>
+                        <div class="timeline-content">
+                            <h3>Research & Publication Planning</h3>
+                            <p>Structured project as foundation for master's thesis and roadmap for 7-8 academic papers covering data engineering, privacy-preserving AI, and library science applications.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2><i class="fas fa-microchip"></i> Architecture & Technical Implementation</h2>
+                
+                <h3>System Components</h3>
+                <div class="architecture-components">
+                    <div class="component">
+                        <h4><i class="fas fa-database"></i> Data Backbone</h4>
+                        <p>High-throughput Python pipeline utilizing ISBNdb API and web scraping, engineered to handle 10M+ API calls for 400,000+ volume catalog enrichment.</p>
+                    </div>
+                    
+                    <div class="component">
+                        <h4><i class="fas fa-video"></i> Gate Counting System</h4>
+                        <p>YOLOv8-based computer vision using existing security cameras for real-time, anonymous foot traffic analysis without storing any personal data.</p>
+                    </div>
+                    
+                    <div class="component">
+                        <h4><i class="fas fa-thermometer-half"></i> Occupancy Tracking</h4>
+                        <p>MLX90640 thermal sensor network providing privacy-preserving analysis of furniture usage and study zone patterns - sees heat, not faces.</p>
+                    </div>
+                    
+                    <div class="component">
+                        <h4><i class="fas fa-chart-bar"></i> Service Analytics</h4>
+                        <p>Enhanced Desk Tracker system providing granular data on service demand, wait times, and staff allocation optimization.</p>
+                    </div>
+                    
+                    <div class="component">
+                        <h4><i class="fas fa-server"></i> Golden Database</h4>
+                        <p>PostgreSQL implementation centralizing all operational data, creating single source of truth for library intelligence.</p>
+                    </div>
+                    
+                    <div class="component">
+                        <h4><i class="fas fa-plug"></i> API Layer</h4>
+                        <p>FastAPI backend exposing insights to dashboards and enabling integration with other library services.</p>
+                    </div>
+                </div>
+
+                <h3>Data Pipeline Architecture</h3>
+                <div class="pipeline-details">
+                    <h4>Batch Processing Strategy</h4>
+                    <p>Engineered resilient batch processing system that:</p>
+                    <ul>
+                        <li>Processes ISBNs in configurable batch sizes (optimized at 350 records)</li>
+                        <li>Implements exponential backoff for API rate limiting</li>
+                        <li>Maintains checkpoint system for crash recovery</li>
+                        <li>Flushes results to disk periodically to prevent memory overflow</li>
+                        <li>Handles malformed data gracefully with comprehensive error logging</li>
+                    </ul>
+                </div>
+
+                <h3>Tech Stack</h3>
+                <div class="tech-stack-grid">
+                    <div class="tech-category">
+                        <h4>Data Pipeline</h4>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">BeautifulSoup</span>
+                        <span class="tech-tag">Asyncio</span>
+                    </div>
+                    <div class="tech-category">
+                        <h4>Computer Vision</h4>
+                        <span class="tech-tag">YOLOv8</span>
+                        <span class="tech-tag">OpenCV</span>
+                        <span class="tech-tag">MLX90640</span>
+                        <span class="tech-tag">TensorFlow</span>
+                    </div>
+                    <div class="tech-category">
+                        <h4>Backend & Storage</h4>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Redis</span>
+                        <span class="tech-tag">SQLAlchemy</span>
+                    </div>
+                    <div class="tech-category">
+                        <h4>Analytics</h4>
+                        <span class="tech-tag">Plotly</span>
+                        <span class="tech-tag">Dash</span>
+                        <span class="tech-tag">Scikit-learn</span>
+                        <span class="tech-tag">Prophet</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2><i class="fas fa-magic"></i> Empowering Staff: Data Superpowers</h2>
+                <p class="section-intro">The system augments library staff, automating tedious tasks and providing clear, actionable insights.</p>
+                
+                <div class="superpowers-grid">
+                    <div class="superpower-card">
+                        <h3><i class="fas fa-eye"></i> Collections Manager</h3>
+                        <h4>X-Ray Vision into Collection Health</h4>
+                        <p>Dashboards showing trending subjects, collection gaps, and data-driven purchasing recommendations. Builds more relevant collections while eliminating wasteful spending.</p>
+                    </div>
+                    
+                    <div class="superpower-card">
+                        <h3><i class="fas fa-satellite"></i> Access Services Staff</h3>
+                        <h4>Real-Time Building Omniscience</h4>
+                        <p>Live map showing floor activity, study room availability, and service desk wait times. Enables proactive student guidance and higher service levels.</p>
+                    </div>
+                    
+                    <div class="superpower-card">
+                        <h3><i class="fas fa-crystal-ball"></i> Library Director</h3>
+                        <h4>Precognition for Strategic Planning</h4>
+                        <p>Predictive analytics forecasting budget and staffing needs based on historical patterns. Enables evidence-based arguments for funding and strategic adjustments.</p>
+                    </div>
+                    
+                    <div class="superpower-card">
+                        <h3><i class="fas fa-bullhorn"></i> Social Media Manager</h3>
+                        <h4>Never-Ending Content Fountain</h4>
+                        <p>Automatic feed of interesting, real-time data points to share. Makes outreach timely, relevant, and genuinely helpful to the student community.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2><i class="fas fa-trophy"></i> Outcomes & Impact</h2>
+                <div class="outcome-stats">
+                    <div class="outcome-stat">
+                        <div class="stat-number">400K+</div>
+                        <div class="stat-label">Volumes Cataloged</div>
+                    </div>
+                    <div class="outcome-stat">
+                        <div class="stat-number">110K+</div>
+                        <div class="stat-label">ISBNs Processed</div>
+                    </div>
+                    <div class="outcome-stat">
+                        <div class="stat-number">10M+</div>
+                        <div class="stat-label">API Calls Handled</div>
+                    </div>
+                    <div class="outcome-stat">
+                        <div class="stat-number">7-8</div>
+                        <div class="stat-label">Papers Planned</div>
+                    </div>
+                </div>
+                
+                <div class="impact-list">
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p><strong>Foundation Dataset:</strong> Successfully processed 110,000+ ISBNs forming core dataset for the platform</p>
+                    </div>
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p><strong>Academic Impact:</strong> Foundation for master's thesis and portfolio of research papers on privacy-preserving AI</p>
+                    </div>
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p><strong>Operational Intelligence:</strong> Will provide UTPB library with unprecedented real-time insights for data-driven decisions</p>
+                    </div>
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p><strong>Open Source Contribution:</strong> Being built as reference implementation for other academic libraries worldwide</p>
+                    </div>
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p><strong>Privacy-First Design:</strong> Demonstrates how to gather intelligence without compromising individual privacy</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2><i class="fas fa-lightbulb"></i> Key Innovations</h2>
+                <ul class="innovations-list">
+                    <li><strong>Memory-Efficient Batch Processing:</strong> Novel approach to handling massive API operations within constrained environments</li>
+                    <li><strong>Privacy-Preserving Analytics:</strong> Thermal sensors and anonymous CV providing insights without personal data</li>
+                    <li><strong>Holistic System Design:</strong> Integration of disparate data sources into unified intelligence platform</li>
+                    <li><strong>Staff Augmentation Focus:</strong> Technology designed to empower humans, not replace them</li>
+                    <li><strong>Academic-Commercial Bridge:</strong> Production-quality system serving as research platform</li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2><i class="fas fa-rocket"></i> Future Development</h2>
+                <p class="section-intro">The platform continues to evolve with ambitious plans for expansion:</p>
+                
+                <div class="future-features">
+                    <h3>Planned Features</h3>
+                    <ul class="future-list">
+                        <li><strong>Predictive Maintenance:</strong> ML models predicting equipment failures before they occur</li>
+                        <li><strong>Personalized Recommendations:</strong> Privacy-preserving recommendation engine for students</li>
+                        <li><strong>Energy Optimization:</strong> Smart HVAC control based on occupancy patterns</li>
+                        <li><strong>Virtual Assistant:</strong> AI-powered chat interface for library services</li>
+                        <li><strong>Cross-Library Federation:</strong> Network effect by connecting multiple library systems</li>
+                    </ul>
+                    
+                    <h3>Research Papers Pipeline</h3>
+                    <ul class="papers-list">
+                        <li>"Privacy-Preserving Occupancy Analytics Using Thermal Imaging"</li>
+                        <li>"High-Throughput Data Pipeline Architecture for Library Systems"</li>
+                        <li>"Computer Vision Applications in Academic Library Management"</li>
+                        <li>"Predictive Analytics for Collection Development"</li>
+                        <li>"Open-Source Intelligence Platform for Academic Libraries"</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 David Mike-Ewewie. Building the future, one model at a time.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
