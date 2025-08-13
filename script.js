@@ -127,10 +127,12 @@ function initMobileMenu() {
 
 initMobileMenu();
 
-// Path Selector Functionality
+// Role Selector Functionality
 document.addEventListener('DOMContentLoaded', function() {
+    const roleButtons = document.querySelectorAll('.role-btn');
     const pathButtons = document.querySelectorAll('.path-btn');
     const modeButtons = document.querySelectorAll('.mode-btn');
+    let currentRole = 'all';
     let currentPath = 'all';
     let currentMode = 'corporate';
     
@@ -139,7 +141,21 @@ document.addEventListener('DOMContentLoaded', function() {
         modeButtons[0].classList.add('active');
     }
     
-    // Path button click handler
+    // Role button click handler
+    roleButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remove active class from all buttons
+            roleButtons.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Get selected role
+            currentRole = this.getAttribute('data-role');
+            updateContent();
+        });
+    });
+    
+    // Path button click handler (for backward compatibility)
     pathButtons.forEach(btn => {
         btn.addEventListener('click', function() {
             // Remove active class from all buttons
@@ -166,70 +182,68 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Update content based on selected path and mode
+    // Update content based on selected role and mode
     function updateContent() {
+        // Use role if available, otherwise fall back to path
+        const activeFilter = currentRole || currentPath;
+        
         // Hide all path-specific content
         document.querySelectorAll('[data-path-content]').forEach(el => {
             el.classList.remove('active');
         });
         
-        // Show content for selected path
-        document.querySelectorAll(`[data-path-content="${currentPath}"]`).forEach(el => {
+        // Show content for selected path/role
+        document.querySelectorAll(`[data-path-content="${activeFilter}"]`).forEach(el => {
             el.classList.add('active');
         });
         
-        // Update hero stats based on path
+        // Update hero stats based on role/path
         updateHeroStats();
         
-        // Filter projects based on path
+        // Filter projects based on role/path
         filterProjects();
         
         // Update URL without reload
         const url = new URL(window.location);
-        url.searchParams.set('path', currentPath);
+        url.searchParams.set('filter', activeFilter);
         if (currentMode !== 'corporate') {
             url.searchParams.set('mode', currentMode);
         }
         window.history.pushState({}, '', url);
     }
     
-    // Update hero statistics based on selected path
+    // Update hero statistics based on selected role/path
     function updateHeroStats() {
-        const stats = document.querySelectorAll('.hero-stats .stat');
-        const pathStats = {
+        const stats = document.querySelectorAll('.stat-card');
+        const activeFilter = currentRole || currentPath;
+        const roleStats = {
             all: [
-                { number: '6', label: 'Certifications' },
-                { number: '3+', label: 'Publications' },
-                { number: '520', label: 'Requests/sec' }
+                { number: '6', label: 'AWS & Security Certs' },
+                { number: '4', label: 'Publications' },
+                { number: '130+', label: 'Team Managed' },
+                { number: '<10ms', label: 'P99 Latency' }
             ],
-            enterprise: [
+            infrastructure: [
                 { number: '130+', label: 'Users Managed' },
                 { number: '99.9%', label: 'Uptime' },
+                { number: '$200K', label: 'Annual Savings' },
                 { number: '3', label: 'AWS Certs' }
             ],
             aiml: [
                 { number: '98.4%', label: 'Model Accuracy' },
-                { number: '66%', label: 'Improvement' },
-                { number: '3+', label: 'Papers' }
-            ],
-            devops: [
-                { number: '6', label: 'Certifications' },
-                { number: '24/7', label: 'Monitoring' },
-                { number: 'K8s', label: 'Expertise' }
+                { number: '1M+', label: 'Daily Predictions' },
+                { number: '66%', label: 'Error Reduction' },
+                { number: '4', label: 'Papers' }
             ],
             research: [
-                { number: '3+', label: 'Publications' },
-                { number: '1', label: 'IEEE Paper' },
-                { number: '2025', label: 'Latest Work' }
-            ],
-            systems: [
-                { number: 'IoT', label: 'Smart Meter' },
-                { number: '38ms', label: 'Latency' },
-                { number: '24/7', label: 'Availability' }
+                { number: '4', label: 'Publications' },
+                { number: 'IEEE', label: 'FIE 2025' },
+                { number: '500GB+', label: 'Dataset Size' },
+                { number: '224', label: 'HPC Cores' }
             ]
         };
         
-        const selectedStats = pathStats[currentPath] || pathStats.all;
+        const selectedStats = roleStats[activeFilter] || roleStats.all;
         stats.forEach((stat, index) => {
             if (selectedStats[index]) {
                 stat.querySelector('.stat-number').textContent = selectedStats[index].number;
@@ -238,13 +252,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Filter projects based on selected path
+    // Filter projects based on selected role/path
     function filterProjects() {
         const projects = document.querySelectorAll('.project-card');
-        console.log(`Filtering projects for path: ${currentPath}`);
+        const activeFilter = currentRole || currentPath;
+        console.log(`Filtering projects for: ${activeFilter}`);
+        
         projects.forEach(project => {
+            const projectRoles = project.getAttribute('data-roles')?.split(',') || [];
             const projectPaths = project.getAttribute('data-paths')?.split(',') || ['all'];
-            if (currentPath === 'all' || projectPaths.includes(currentPath)) {
+            const relevantTags = [...projectRoles, ...projectPaths];
+            
+            if (activeFilter === 'all' || relevantTags.includes(activeFilter)) {
                 project.style.display = '';
                 project.style.opacity = '1';
                 project.style.transform = 'translateY(0)';
