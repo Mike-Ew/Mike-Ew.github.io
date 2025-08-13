@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const activeFilter = currentRole || currentPath;
         const roleStats = {
             all: [
-                { number: '6', label: 'AWS & Security Certs' },
+                { number: '8', label: 'AWS & CompTIA Certs' },
                 { number: '4', label: 'Publications' },
                 { number: '130+', label: 'Team Managed' },
                 { number: '<10ms', label: 'P99 Latency' }
