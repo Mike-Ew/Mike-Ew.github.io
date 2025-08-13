@@ -704,19 +704,7 @@ body {
     border-radius: var(--radius-md);
 }
 
-.project-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    color: var(--primary);
-    font-weight: 600;
-    text-decoration: none;
-    transition: all var(--transition-base);
-}
-
-.project-link:hover {
-    gap: var(--space-sm);
-}
+/* Removed duplicate - using the styled version below */
 
 /* ===================================
    ANIMATIONS
