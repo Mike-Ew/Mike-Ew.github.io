@@ -1714,7 +1714,7 @@ body {
     font-size: var(--text-sm);
     margin-top: var(--space-lg);
     padding-top: var(--space-lg);
-    border-top: 1px solid var(--gray-700);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 /* =====================================
    CONTACT SECTION
