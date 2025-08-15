@@ -469,19 +469,41 @@ body {
 .cta-links {
     margin-top: var(--space-md);
     font-size: var(--text-md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-md);
 }
 .cta-links a {
     color: var(--gray-700);
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
+    font-weight: 600;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease;
+    position: relative;
+}
+.cta-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
 }
 .cta-links a:hover {
     color: var(--primary);
+    background: var(--primary-light);
+}
+.cta-links a:hover::after {
+    width: 80%;
 }
 .cta-links .separator {
-    color: var(--gray-400);
-    margin: 0 var(--space-sm);
+    color: var(--gray-300);
+    font-weight: 300;
 }
 
 /* ===================================
@@ -489,7 +511,19 @@ body {
    =================================== */
 .about-section {
     padding: var(--space-4xl) 0;
-    background: var(--gray-50);
+    background: linear-gradient(135deg, #f8f5ff 0%, #ffffff 50%, #f8f5ff 100%);
+    position: relative;
+}
+
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--purple-muted), transparent);
+    opacity: 0.3;
 }
 
 .section-header {
@@ -536,8 +570,32 @@ body {
     color: var(--gray-900);
 }
 
-/* Skills Grid - Premium Design */
+/* Skills Section - Standalone */
 .skills-section {
+    padding: calc(var(--space-4xl) + var(--space-xl)) 0;
+    background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+}
+
+.skills-section .section-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+}
+
+.skills-section .section-header h2 {
+    font-size: var(--text-4xl);
+    font-weight: 800;
+    color: var(--gray-900);
+    margin-bottom: var(--space-md);
+}
+
+.skills-section .section-header p {
+    font-size: var(--text-xl);
+    color: var(--primary);
+    font-weight: 500;
+}
+
+/* Skills Grid - Premium Design */
+.about-section .skills-section {
     background: var(--white);
     padding: var(--space-2xl);
     border-radius: var(--radius-2xl);
@@ -640,7 +698,7 @@ body {
    PROJECTS SECTION - Portfolio Showcase
    =================================== */
 .projects-section {
-    padding: var(--space-4xl) 0;
+    padding: calc(var(--space-4xl) + var(--space-xl)) 0;
     background: var(--white);
 }
 
@@ -1640,14 +1698,14 @@ body {
 }
 
 .papers-list a {
-    color: var(--accent);
+    color: var(--purple-muted);
     text-decoration: none;
     font-size: var(--text-sm);
     transition: color 0.3s ease;
 }
 
 .papers-list a:hover {
-    color: var(--primary-light);
+    color: var(--white);
     text-decoration: underline;
 }
 
@@ -1657,4 +1715,12 @@ body {
     margin-top: var(--space-lg);
     padding-top: var(--space-lg);
     border-top: 1px solid var(--gray-700);
+}
+/* =====================================
+   CONTACT SECTION
+   ===================================== */
+.contact {
+    padding: calc(var(--space-4xl) + var(--space-xl)) 0 var(--space-4xl);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--white) 100%);
+    margin-top: var(--space-2xl);
 }
