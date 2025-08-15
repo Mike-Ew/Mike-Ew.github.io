@@ -251,29 +251,36 @@ body {
 }
 
 .hero h1 {
-    font-size: clamp(var(--text-4xl), 7vw, var(--text-7xl));
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
     color: var(--gray-900);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-xs);
     animation: fadeInUp 0.8s ease-out;
+    background: linear-gradient(135deg, var(--gray-900) 0%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .hero h2 {
-    font-size: clamp(var(--text-xl), 3vw, var(--text-3xl));
-    font-weight: 400;
-    color: var(--gray-600);
-    margin-bottom: var(--space-lg);
+    font-size: clamp(var(--text-lg), 2.5vw, var(--text-2xl));
+    font-weight: 500;
+    color: var(--primary);
+    margin-bottom: var(--space-xl);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     animation: fadeInUp 0.8s ease-out 0.1s both;
 }
 
 .hero p {
-    font-size: var(--text-lg);
-    color: var(--gray-600);
-    max-width: 600px;
-    margin-bottom: var(--space-xl);
-    line-height: 1.8;
+    font-size: clamp(var(--text-lg), 1.75vw, var(--text-xl));
+    color: var(--gray-700);
+    max-width: 750px;
+    margin-bottom: var(--space-2xl);
+    line-height: 1.6;
+    font-weight: 400;
     animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
@@ -1658,10 +1665,11 @@ body {
 
 /* Footer */
 .footer {
-    background: linear-gradient(135deg, #1a0f2e 0%, #2d1b4e 100%);
-    color: var(--white);
-    padding: var(--space-2xl) 0;
+    background: linear-gradient(135deg, #f8f5ff 0%, #ffffff 100%);
+    color: var(--gray-800);
+    padding: var(--space-3xl) 0;
     text-align: center;
+    border-top: 2px solid var(--purple-muted);
 }
 
 .footer p {
@@ -1681,7 +1689,7 @@ body {
 }
 
 .footer-papers h4 {
-    color: var(--white);
+    color: var(--primary-dark);
     font-size: var(--text-lg);
     font-weight: 600;
     margin-bottom: var(--space-md);
@@ -1698,23 +1706,26 @@ body {
 }
 
 .papers-list a {
-    color: var(--purple-muted);
+    color: var(--primary);
     text-decoration: none;
     font-size: var(--text-sm);
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: var(--space-xs) 0;
 }
 
 .papers-list a:hover {
-    color: var(--white);
+    color: var(--primary-dark);
     text-decoration: underline;
+    transform: translateX(5px);
 }
 
 .footer-tagline {
-    color: var(--gray-300);
+    color: var(--gray-600);
     font-size: var(--text-sm);
     margin-top: var(--space-lg);
     padding-top: var(--space-lg);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--gray-200);
 }
 /* =====================================
    CONTACT SECTION
