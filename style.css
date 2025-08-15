@@ -1610,3 +1610,51 @@ body {
     color: var(--gray-300);
     font-size: var(--text-sm);
 }
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    align-items: center;
+}
+
+.footer-papers {
+    margin-bottom: var(--space-lg);
+}
+
+.footer-papers h4 {
+    color: var(--white);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+}
+
+.papers-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.papers-list li {
+    margin-bottom: var(--space-sm);
+}
+
+.papers-list a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    transition: color 0.3s ease;
+}
+
+.papers-list a:hover {
+    color: var(--primary-light);
+    text-decoration: underline;
+}
+
+.footer-tagline {
+    color: var(--gray-300);
+    font-size: var(--text-sm);
+    margin-top: var(--space-lg);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--gray-700);
+}
