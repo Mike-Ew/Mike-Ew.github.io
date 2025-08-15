@@ -466,6 +466,24 @@ body {
     animation: pulse 2s infinite;
 }
 
+.cta-links {
+    margin-top: var(--space-md);
+    font-size: var(--text-md);
+}
+.cta-links a {
+    color: var(--gray-700);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+.cta-links a:hover {
+    color: var(--primary);
+}
+.cta-links .separator {
+    color: var(--gray-400);
+    margin: 0 var(--space-sm);
+}
+
 /* ===================================
    ABOUT SECTION - Professional Depth
    =================================== */
