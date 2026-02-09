@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCENTINEL | David Mike-Ewewie</title>
+    <meta name="description" content="AI-driven monitoring and control platform for H2S scavenging operations in oil and gas">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">DME</div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="index.html">Projects</a></li>
+                <li><a href="../blog/index.html">Blog</a></li>
+                <li><a href="../resume.html">Resume</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Project Detail -->
+    <article class="project-detail">
+        <div class="container">
+            <!-- HEADER -->
+            <div class="project-header">
+                <a href="index.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to Projects
+                </a>
+                <h1>SCENTINEL</h1>
+                <p class="project-tagline">AI-driven monitoring and control platform for H2S scavenging operations — from field sensors to real-time dashboards.</p>
+                <div class="project-meta">
+                    <span class="project-status">Prototype</span>
+                    <span class="project-date">January - February 2026</span>
+                    <span class="project-role">AI Platform Architect</span>
+                </div>
+            </div>
+
+            <!-- THE CHALLENGE -->
+            <section class="project-section">
+                <h2><i class="fas fa-exclamation-circle"></i> The Challenge</h2>
+                <div class="challenge-grid">
+                    <div class="challenge-item">
+                        <h3>Manual Operations</h3>
+                        <p>H2S scavenging in oil and gas is largely manual. Operators drive to remote well sites to check chemical levels, read gauges, and adjust injection rates — costing $500-$1,000 per unnecessary truck roll.</p>
+                    </div>
+                    <div class="challenge-item">
+                        <h3>Chemical Waste</h3>
+                        <p>Without real-time visibility, operators over-treat by 15-30% as a safety margin. Across hundreds of sites, this adds up to significant unnecessary chemical spend.</p>
+                    </div>
+                    <div class="challenge-item">
+                        <h3>Scale vs. Cost</h3>
+                        <p>Commercial historian platforms (AVEVA PI, GE Proficy) cost $200K-$500K/year at scale. An open-source stack could deliver the same capability at a fraction of the cost — but requires custom engineering.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROCESS & CONTRIBUTION -->
+            <section class="project-section">
+                <h2><i class="fas fa-cogs"></i> The Process & My Contribution</h2>
+                <p class="section-intro">I designed and built the full platform end-to-end — from hardware selection to data pipeline to live dashboards.</p>
+                <div class="process-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">1</div>
+                        <div class="timeline-content">
+                            <h3>Problem Scoping & Architecture Design</h3>
+                            <p>Analyzed the industrial monitoring problem space, mapped out tag counts (40-60 per tower), calculated data throughput at scale (25,000 writes/sec for 500 sites), and designed an edge-first architecture where field sites operate independently of cloud connectivity.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2</div>
+                        <div class="timeline-content">
+                            <h3>Infrastructure & Server Sizing</h3>
+                            <p>Spec'd an on-premises server build (EPYC CPU, 256GB DDR5 ECC, NVMe + HDD tiered storage, workstation GPU for ML training). Built the complete TCO comparison showing $69K savings over 3 years vs. equivalent cloud infrastructure.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">3</div>
+                        <div class="timeline-content">
+                            <h3>Demo Stack Implementation</h3>
+                            <p>Built a working prototype using Docker Compose: Mosquitto MQTT broker, Telegraf for data ingestion, InfluxDB for time-series storage, and Grafana for dashboards. Created a Python simulator that generates realistic tower telemetry with live anomaly injection.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">4</div>
+                        <div class="timeline-content">
+                            <h3>Business Case & Cost Analysis</h3>
+                            <p>Developed a vendor-verified $150K budget with line-item costs, ROI analysis (9.1-month payback at 50 sites), and a phased scaling roadmap from 10 to 5,000+ sites. Every number backed by real vendor pricing.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ARCHITECTURE -->
+            <section class="project-section">
+                <h2><i class="fas fa-microchip"></i> Architecture & Technical Deep Dive</h2>
+
+                <h3>System Architecture</h3>
+                <p>SCENTINEL uses an edge-first architecture where field devices collect and buffer data locally, transmitting aggregates over cellular and switching to full-resolution bursts only during anomalies.</p>
+                <div class="architecture-components">
+                    <div class="component">
+                        <h4><i class="fas fa-satellite-dish"></i> Edge Layer</h4>
+                        <p>Ruggedized edge gateways collect sensor data at 1Hz, buffer locally in SQLite for offline resilience, and publish to MQTT. Each site runs autonomously — if connectivity drops, no data is lost.</p>
+                    </div>
+                    <div class="component">
+                        <h4><i class="fas fa-exchange-alt"></i> Transport Layer</h4>
+                        <p>MQTT provides lightweight pub/sub messaging optimized for constrained networks. 5-minute aggregates under normal conditions, 1-second bursts during excursions — keeping cellular costs to ~40MB/site/month.</p>
+                    </div>
+                    <div class="component">
+                        <h4><i class="fas fa-database"></i> Storage & Processing</h4>
+                        <p>InfluxDB handles time-series ingestion at 25,000+ writes/second. Tiered storage: NVMe for hot data (30-90 days), HDD array for cold compliance retention (1-7 years). All on a single on-premises server.</p>
+                    </div>
+                    <div class="component">
+                        <h4><i class="fas fa-chart-line"></i> Visualization & Control</h4>
+                        <p>Grafana dashboards provide real-time monitoring, historical trending, and alerting. Bidirectional communication allows operators to send commands back to field equipment — toggle pumps, adjust setpoints — from the dashboard.</p>
+                    </div>
+                </div>
+
+                <h3>Tech Stack</h3>
+                <div class="tech-stack-grid">
+                    <div class="tech-category">
+                        <h4>Edge</h4>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">paho-mqtt</span>
+                        <span class="tech-tag">SQLite</span>
+                    </div>
+                    <div class="tech-category">
+                        <h4>Transport & Ingestion</h4>
+                        <span class="tech-tag">MQTT</span>
+                        <span class="tech-tag">Mosquitto</span>
+                        <span class="tech-tag">Telegraf</span>
+                    </div>
+                    <div class="tech-category">
+                        <h4>Storage & Compute</h4>
+                        <span class="tech-tag">InfluxDB</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Docker</span>
+                    </div>
+                    <div class="tech-category">
+                        <h4>Visualization & ML</h4>
+                        <span class="tech-tag">Grafana</span>
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">scikit-learn</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- OUTCOMES -->
+            <section class="project-section">
+                <h2><i class="fas fa-trophy"></i> Outcomes & Impact</h2>
+                <div class="outcome-stats">
+                    <div class="outcome-stat">
+                        <div class="stat-number">25K</div>
+                        <div class="stat-label">Writes/sec capacity</div>
+                    </div>
+                    <div class="outcome-stat">
+                        <div class="stat-number">$69K</div>
+                        <div class="stat-label">3-year cloud savings</div>
+                    </div>
+                    <div class="outcome-stat">
+                        <div class="stat-number">9.1mo</div>
+                        <div class="stat-label">Payback at 50 sites</div>
+                    </div>
+                    <div class="outcome-stat">
+                        <div class="stat-number">$0</div>
+                        <div class="stat-label">Per-tag licensing fees</div>
+                    </div>
+                </div>
+                <div class="impact-list">
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p><strong>Working prototype:</strong> Full Docker stack with live data flowing from simulator through MQTT to InfluxDB to Grafana dashboards.</p>
+                    </div>
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p><strong>Defensible cost model:</strong> Every line item backed by real vendor pricing — GPU options, DDR5 ECC RAM, industrial sensor costs, cellular bandwidth math.</p>
+                    </div>
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p><strong>Scalable architecture:</strong> Designed to grow from 10 sites (single server) to 5,000+ (clustered) with a clear phase-by-phase roadmap.</p>
+                    </div>
+                    <div class="impact-item">
+                        <i class="fas fa-check-circle"></i>
+                        <p><strong>Open-source advantage:</strong> Entire stack built on InfluxDB OSS, Grafana OSS, Mosquitto — eliminating per-tag licensing that makes commercial platforms cost $200K-$500K/year.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- KEY LEARNINGS -->
+            <section class="project-section">
+                <h2><i class="fas fa-lightbulb"></i> Key Learnings</h2>
+                <p class="section-intro">Building an industrial IoT platform from scratch — even as a prototype — taught me things no tutorial covers:</p>
+                <ul class="learnings-list">
+                    <li><strong>Tag scaling math is real:</strong> At 50,000 tags and 1Hz, you're generating 4.3 billion data points per day. Normal computers literally freeze trying to trend that data — understanding why (RAM paging, IOPS limits, index sizes) is the difference between a system that works and one that crashes.</li>
+                    <li><strong>Edge-first is non-negotiable:</strong> In oil and gas, cellular drops. Power fluctuates. The field site must keep operating and buffering data locally regardless of connectivity. This constraint drives every architectural decision.</li>
+                    <li><strong>Business case before architecture:</strong> The most technically elegant system means nothing if you can't justify the spend. Leading with cost savings and ROI — not MQTT and InfluxDB — is what gets budget approved.</li>
+                    <li><strong>Hardware sizing requires domain knowledge:</strong> You can't Google "how much RAM for an IoT server." You need to understand your specific tag count, query patterns, retention requirements, and concurrent user load to size correctly.</li>
+                </ul>
+            </section>
+
+            <!-- FUTURE VISION -->
+            <section class="project-section">
+                <h2><i class="fas fa-rocket"></i> Future Vision</h2>
+                <p>SCENTINEL was built as a prototype, but the architecture is designed for production. The roadmap includes:</p>
+                <ul class="future-list">
+                    <li><strong>ML anomaly detection:</strong> LSTM and Transformer models trained on historical tag data to detect H2S breakthrough, equipment degradation, and chemical depletion before they become incidents.</li>
+                    <li><strong>Predictive chemical optimization:</strong> AI-driven injection timing and dosing to reduce the 15-30% over-treatment that's standard in the industry today.</li>
+                    <li><strong>Fleet management:</strong> OTA firmware updates, remote configuration, and health monitoring across hundreds of edge devices.</li>
+                    <li><strong>Phase II scaling:</strong> Adding Kafka/Redpanda for stream processing and database replication at 200+ sites, with geographic distribution at 500+.</li>
+                </ul>
+            </section>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 David Mike-Ewewie. Building the future, one model at a time.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
